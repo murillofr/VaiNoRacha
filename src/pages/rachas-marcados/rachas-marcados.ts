@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-
-/**
- * Generated class for the RachasMarcadosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -15,7 +8,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 })
 export class RachasMarcadosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -29,6 +22,28 @@ export class RachasMarcadosPage {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  showConfirm() {
+    let confirm = this.alertCtrl.create({
+      title: 'Você deseja cancelar esse Racha?',
+      message: 'Essa ação não pode ser desfeita.',
+      buttons: [
+        {
+          text: 'NÃO',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'SIM',
+          handler: () => {
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }
