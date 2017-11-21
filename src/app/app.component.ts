@@ -5,6 +5,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { RachasMarcadosPage } from './../pages/rachas-marcados/rachas-marcados';
+import { MarcarRachaPage } from './../pages/marcar-racha/marcar-racha';
+import { ConquistasPage } from './../pages/conquistas/conquistas';
+import { ConfiguracoesPage } from './../pages/configuracoes/configuracoes';
+import { AjudaPage } from './../pages/ajuda/ajuda';
+import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,8 +27,14 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Mapa', component: HomePage },
+      { title: 'List', component: ListPage },
+      { title: 'Rachas Marcados', component: RachasMarcadosPage },
+      { title: 'Marcar Racha', component: MarcarRachaPage },
+      { title: 'Conquistas', component: ConquistasPage },
+      { title: 'Configurações', component: ConfiguracoesPage },
+      { title: 'Ajuda', component: AjudaPage },
+      { title: 'Sobre Nós', component: SobreNosPage }
     ];
 
   }

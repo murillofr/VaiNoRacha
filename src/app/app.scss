@@ -14,3 +14,25 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+* {
+    color: #1e1e1e;
+}
+
+$fa-font-path: "../assets/fonts" !default; 
+@import "font-awesome"; 
+i[class^="fa-"], ion-icon[class^="fa-"] {    
+   font-family: "FontAwesome" !important;
+   width: 10vw;
+}
+
+#imgUser {
+    height: 20vw;
+    width: 20vw;
+    border-radius: 50%;
+}
+
+hr {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

@@ -6,11 +6,70 @@
   </ion-header>
 
   <ion-content>
+
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col col-4>
+          <img id="imgUser" src="//ionicframework.com/img/docs/spengler.jpg" />
+        </ion-col>
+        <ion-col col-8>
+          <h3>Username</h3>
+          <p>Conquistas</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <hr>
+
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[0])">
+        <ion-icon class="fa-map-marker" item-start></ion-icon>
+        Mapa
       </button>
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[2])">
+        <ion-icon class="fa-clock-o" item-start></ion-icon>
+        Rachas Marcados
+      </button>
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[3])">
+        <ion-icon class="fa-futbol-o" item-start></ion-icon>
+        Marcar Racha
+      </button>
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[4])">
+        <ion-icon class="fa-trophy" item-start></ion-icon>
+        Conquistas
+      </button>
+
+      <hr>
+
+      <button menuClose ion-item no-lines>
+        <ion-icon class="fa-share-alt" item-start></ion-icon>
+        Compartilhar
+      </button>
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[5])">
+        <ion-icon class="fa-cog" item-start></ion-icon>
+        Configurações
+      </button>
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[6])">
+        <ion-icon class="fa-question-circle" item-start></ion-icon>
+        Ajuda
+      </button>
+
+      <button menuClose ion-item no-lines (click)="openPage(pages[7])">
+        <ion-icon class="fa-users" item-start></ion-icon>
+        Sobre nós
+      </button>
+
+      <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        {{p.title}}
+      </button> -->
     </ion-list>
+
   </ion-content>
 
 </ion-menu>
