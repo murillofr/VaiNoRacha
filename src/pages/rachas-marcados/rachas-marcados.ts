@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { QuadraService } from './../../service/rest/QuadraService';
 
 @IonicPage()
 @Component({
@@ -8,11 +9,33 @@ import { IonicPage, NavController, NavParams, ToastController, AlertController }
 })
 export class RachasMarcadosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public alertCtrl: AlertController) {
+  quadras: Array<any>;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    private quadraService: QuadraService) {
+      this.encontrarQuadras();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RachasMarcadosPage');
+  }
+
+  encontrarQuadras() {
+    this.quadraService.encontrarQuadras().subscribe(
+      data => {
+        this.quadras = data.results;
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      },
+      () => console.log('Todas as quadras encontradas')
+    );
+    console.log('TESTE');
   }
 
   tapEvent(e) {

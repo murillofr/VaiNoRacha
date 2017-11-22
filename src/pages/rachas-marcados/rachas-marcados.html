@@ -23,8 +23,19 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-card>
+  <h3>TESTE</h3>
+  <ion-list>
+    <ion-item *ngFor="let quadra of quadras">
+      <ion-card>
+        <ion-item>
+          <ion-icon class="fa-futbol-o" item-start></ion-icon>
+          <h3>{{quadra.quadra}}</h3>
+        </ion-item>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <h3>TESTE 2</h3>
+  <!-- <ion-card>
 
     <ion-item>
       <ion-icon class="fa-futbol-o" item-start></ion-icon>
@@ -51,9 +62,9 @@
     </ion-item>
 
     <ion-item>
-      <button ion-button color="danger" default block (click)="showConfirm()">CANCELAR RACHA</button>
+      <button ion-button color="danger" default block (click)="encontrarQuadras()">CANCELAR RACHA</button>
     </ion-item>
 
-  </ion-card>
+  </ion-card> -->
 
 </ion-content>
