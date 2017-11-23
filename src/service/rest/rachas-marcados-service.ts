@@ -3,12 +3,12 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class QuadraService {
+export class RachasMarcadosService {
 
     constructor(private http: Http) { }
 
-    encontrarQuadras() {
-        var url = 'http://localhost:8080/rachas';
+    encontrarRachasMarcados() {
+        var url = 'https://vainoracha.herokuapp.com/usuarios/rachas/3';
         var response = this.http.get(url).map(res => res.json());
         return response;
     }

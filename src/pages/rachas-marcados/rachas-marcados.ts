@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
-import { QuadraService } from './../../service/rest/QuadraService';
+import { RachasMarcadosService } from './../../service/rest/rachas-marcados-service';
 
 @IonicPage()
 @Component({
@@ -9,15 +9,15 @@ import { QuadraService } from './../../service/rest/QuadraService';
 })
 export class RachasMarcadosPage {
 
-  quadras: Array<any>;
+  private rachasMarcados: Array<any>;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private toastCtrl: ToastController,
+    public toastCtrl: ToastController,
     public alertCtrl: AlertController,
-    private quadraService: QuadraService) {
-      this.encontrarQuadras();
+    public rachasMarcadosService: RachasMarcadosService) {
+    this.encontrarQuadras();
   }
 
   ionViewDidLoad() {
@@ -25,17 +25,16 @@ export class RachasMarcadosPage {
   }
 
   encontrarQuadras() {
-    this.quadraService.encontrarQuadras().subscribe(
+    this.rachasMarcadosService.encontrarRachasMarcados().subscribe(
       data => {
-        this.quadras = data.results;
+        this.rachasMarcados = data;
         console.log(data);
       },
       err => {
         console.log(err);
       },
-      () => console.log('Todas as quadras encontradas')
+      () => console.log('Todas os rachas marcados foram encontrados')
     );
-    console.log('TESTE');
   }
 
   tapEvent(e) {
@@ -50,18 +49,19 @@ export class RachasMarcadosPage {
   showConfirm() {
     let confirm = this.alertCtrl.create({
       title: 'Você deseja cancelar esse Racha?',
-      message: 'Essa ação não pode ser desfeita.',
+      subTitle: 'Essa ação não poderá ser desfeita.',
       buttons: [
         {
           text: 'NÃO',
+          role: 'cancel',
           handler: () => {
-            console.log('Disagree clicked');
+            console.log('NÃO clicado');
           }
         },
         {
           text: 'SIM',
           handler: () => {
-            console.log('Agree clicked');
+            console.log('SIM clicado');
           }
         }
       ]

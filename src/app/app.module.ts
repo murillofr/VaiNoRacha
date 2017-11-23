@@ -13,7 +13,7 @@ import { ConfiguracoesPage } from './../pages/configuracoes/configuracoes';
 import { AjudaPage } from './../pages/ajuda/ajuda';
 import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
 
-import { QuadraService } from './../service/rest/QuadraService';
+import { RachasMarcadosService } from './../service/rest/rachas-marcados-service';
 
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -54,7 +54,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     GoogleMaps,
     Geolocation,
-    QuadraService,
+    RachasMarcadosService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

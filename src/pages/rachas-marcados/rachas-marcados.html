@@ -22,49 +22,40 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <h3>TESTE</h3>
-  <ion-list>
-    <ion-item *ngFor="let quadra of quadras">
-      <ion-card>
-        <ion-item>
-          <ion-icon class="fa-futbol-o" item-start></ion-icon>
-          <h3>{{quadra.quadra}}</h3>
-        </ion-item>
-      </ion-card>
-    </ion-item>
-  </ion-list>
-  <h3>TESTE 2</h3>
-  <!-- <ion-card>
+<ion-content class="body">
+
+  <ion-card *ngFor="let rachaMarcado of rachasMarcados">
 
     <ion-item>
       <ion-icon class="fa-futbol-o" item-start></ion-icon>
-      <h3>Quadra Muito Doida</h3>
+      <h3>{{ rachaMarcado.quadraNome }}</h3>
     </ion-item>
 
     <ion-item (tap)="tapEvent($event)" class="clickEndereco">
       <ion-icon class="fa-map-signs" item-start></ion-icon>
-      <h3>Rua dos Tolos, 666</h3>
-      <p>Tibery</p>
+      <h3>{{ rachaMarcado.quadraLogadouro }}, {{ rachaMarcado.quadraNumero }}</h3>
+      <p>{{ rachaMarcado.quadraBairro }}</p>
     </ion-item>
 
     <ion-item>
       <ion-icon class="fa-clock-o" item-start></ion-icon>
-      <h3>19:00 às 20:00</h3>
+      <h3>{{ rachaMarcado.horario }}</h3>
     </ion-item>
 
     <ion-item>
       <ion-icon class="fa-phone" item-start></ion-icon>
-      <h3>3211-1132</h3>
-      <button ion-button item-end color="secondary">
+      <h3>{{ rachaMarcado.telefoneQuara }}</h3>
+      <button ion-button item-end color="secondary" (tap)="tapEvent($event)">
         LIGAR
       </button>
     </ion-item>
 
+    <hr>
+    
     <ion-item>
-      <button ion-button color="danger" default block (click)="encontrarQuadras()">CANCELAR RACHA</button>
+      <button ion-button color="danger" default block (click)="showConfirm()">CANCELAR RACHA</button>
     </ion-item>
 
-  </ion-card> -->
+  </ion-card>
 
 </ion-content>
