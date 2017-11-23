@@ -13,6 +13,7 @@ import { ConfiguracoesPage } from './../pages/configuracoes/configuracoes';
 import { AjudaPage } from './../pages/ajuda/ajuda';
 import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
 
+import { HomeService } from './../service/rest/home-service';
 import { RachasMarcadosService } from './../service/rest/rachas-marcados-service';
 
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -54,6 +55,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     GoogleMaps,
     Geolocation,
+    HomeService,
     RachasMarcadosService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

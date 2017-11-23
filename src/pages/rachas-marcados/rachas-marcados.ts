@@ -17,14 +17,14 @@ export class RachasMarcadosPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public rachasMarcadosService: RachasMarcadosService) {
-    this.encontrarQuadras();
+    this.encontrarRachasMarcados();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RachasMarcadosPage');
   }
 
-  encontrarQuadras() {
+  encontrarRachasMarcados() {
     this.rachasMarcadosService.encontrarRachasMarcados().subscribe(
       data => {
         this.rachasMarcados = data;
