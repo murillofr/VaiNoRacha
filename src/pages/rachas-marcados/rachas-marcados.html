@@ -31,7 +31,7 @@
       <h3>{{ rachaMarcado.quadraNome }}</h3>
     </ion-item>
 
-    <ion-item (tap)="tapEvent($event)" class="clickEndereco">
+    <ion-item (tap)="tapEvent()" class="clickEndereco">
       <ion-icon class="fa-map-signs" item-start></ion-icon>
       <h3>{{ rachaMarcado.quadraLogadouro }}, {{ rachaMarcado.quadraNumero }}</h3>
       <p>{{ rachaMarcado.quadraBairro }}</p>
@@ -41,15 +41,15 @@
       <ion-icon class="fa-clock-o" item-start></ion-icon>
       <h3>{{ rachaMarcado.data }}</h3>
       <h3>{{ rachaMarcado.horario }}</h3>
-      <button ion-button icon-only item-end>
-        <ion-icon class="fa-bell-slash-o"></ion-icon>
+      <button ion-button icon-only item-end clear (click)="avisarRacha(rachaMarcado)">
+        <ion-icon id="{{ rachaMarcado.id }}" class="fa-bell-slash-o"></ion-icon>
       </button>
     </ion-item>
 
     <ion-item>
       <ion-icon class="fa-phone" item-start></ion-icon>
       <h3>{{ rachaMarcado.telefoneQuara }}</h3>
-      <button ion-button item-end color="secondary" (tap)="tapEvent($event)">
+      <button ion-button item-end color="secondary" (tap)="tapEvent()">
         LIGAR
       </button>
     </ion-item>

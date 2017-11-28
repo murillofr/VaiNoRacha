@@ -55,7 +55,7 @@ export class RachasMarcadosPage {
     );
   }
 
-  tapEvent(e) {
+  tapEvent() {
     let toast = this.toastCtrl.create({
       message: 'Em construção',
       duration: 500,
@@ -85,6 +85,16 @@ export class RachasMarcadosPage {
       ]
     });
     confirm.present();
+  }
+
+  avisarRacha(racha) {
+    var classeOld = document.getElementById(racha.id).className;
+    if (classeOld.indexOf('-slash-o') > 0) {
+      document.getElementById(racha.id).className = classeOld.replace('-slash-o','');
+      this.tapEvent();
+    }else {
+      document.getElementById(racha.id).className =  classeOld.replace('fa-bell','fa-bell-slash-o');
+    }
   }
 
 }
