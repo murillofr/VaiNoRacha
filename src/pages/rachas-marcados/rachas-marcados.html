@@ -41,6 +41,9 @@
       <ion-icon class="fa-clock-o" item-start></ion-icon>
       <h3>{{ rachaMarcado.data }}</h3>
       <h3>{{ rachaMarcado.horario }}</h3>
+      <button ion-button icon-only item-end>
+        <ion-icon class="fa-bell-slash-o"></ion-icon>
+      </button>
     </ion-item>
 
     <ion-item>
@@ -52,7 +55,7 @@
     </ion-item>
 
     <hr>
-    
+
     <ion-item>
       <button ion-button color="danger" default block (click)="showConfirm()">CANCELAR RACHA</button>
     </ion-item>

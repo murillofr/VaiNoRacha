@@ -22,7 +22,7 @@
 //   Marker
 // } from '@ionic-native/google-maps';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HomeService } from './../../service/rest/home-service';
 
@@ -44,6 +44,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    public loadingCtrl: LoadingController,
     public geolocation: Geolocation,
     public homeService: HomeService) {
 
@@ -171,6 +172,12 @@ export class HomePage {
   }
 
   encontrarQuadras() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando mapa...'
+    });
+
+    loading.present();
+
     this.homeService.encontrarQuadras().subscribe(
       data => {
         this.quadras = data;
@@ -181,6 +188,7 @@ export class HomePage {
       },
       () => {
         console.log('Todas as quadras foram encontradas');
+        loading.dismiss();
         this.loadMap();
       }
     );

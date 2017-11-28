@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  LoadingController,
+  ToastController,
+  AlertController
+} from 'ionic-angular';
 import { RachasMarcadosService } from './../../service/rest/rachas-marcados-service';
 
 @IonicPage()
@@ -14,17 +21,25 @@ export class RachasMarcadosPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     public rachasMarcadosService: RachasMarcadosService) {
-    this.encontrarRachasMarcados();
+    
   }
 
   ionViewDidLoad() {
+    this.encontrarRachasMarcados();
     console.log('ionViewDidLoad RachasMarcadosPage');
   }
 
   encontrarRachasMarcados() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando rachas...'
+    });
+
+    loading.present();
+
     this.rachasMarcadosService.encontrarRachasMarcados().subscribe(
       data => {
         this.rachasMarcados = data;
@@ -33,7 +48,10 @@ export class RachasMarcadosPage {
       err => {
         console.log(err);
       },
-      () => console.log('Todas os rachas marcados foram encontrados')
+      () => {
+        console.log('Todos os rachas marcados foram encontrados');
+        loading.dismiss();
+      }
     );
   }
 

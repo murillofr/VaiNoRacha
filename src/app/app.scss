@@ -19,6 +19,10 @@
     color: #1e1e1e;
 }
 
+.body {
+    background-image: linear-gradient(to bottom, #409737, #7dc055);
+}
+
 $fa-font-path: "../assets/fonts" !default; 
 @import "font-awesome"; 
 i[class^="fa-"], ion-icon[class^="fa-"] {    

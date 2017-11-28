@@ -2,7 +2,16 @@ page-marcar-racha {
 
 }
 
-.body {
-    // background-color:rgba(112,204,66,1);
-    background-color:rgba(50,150,5,1);
+.selectHorario {
+    min-width: 51vw;
+    text-align: right;
+}
+
+#divResultadosPorHorario {
+    height: 0;
+    margin: 0;
+}
+
+.imgHorarios {
+    width: 15%;
 }
