@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class RachasMarcadosService {
 
-    constructor(private http: Http) { }
+    basepath = "/vainorachaapi"
+
+    constructor(
+        private http: Http,
+        private _platform: Platform
+    ) { 
+        if(this._platform.is("cordova")) {
+            this.basepath = "https://vainoracha.herokuapp.com";
+        }
+    }
 
     encontrarRachasMarcados() {
-        var url = 'https://vainoracha.herokuapp.com/usuarios/rachas/3';
+        var url = `${this.basepath}/usuarios/rachas/3`;
         var response = this.http.get(url).map(res => res.json());
         return response;
     }

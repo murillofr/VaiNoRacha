@@ -4,5 +4,13 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "name": "proxy-example",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/vainorachaapi",
+      "proxyUrl": "https://vainoracha.herokuapp.com"
+    }
+  ]
 }
