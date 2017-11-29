@@ -7,6 +7,7 @@ import {
   ToastController
 } from 'ionic-angular';
 import { MarcarRachaService } from './../../service/rest/marcar-racha-service';
+import { RachasPage } from './../rachas/rachas';
 
 var dataSelecionada = null;
 var horarioSelecionado = null;
@@ -113,6 +114,14 @@ export class MarcarRachaPage {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  pushPageRachas(quadra): void {
+    this.navCtrl.push(RachasPage,{
+      quadra:quadra,
+      dataRacha:dataSelecionada,
+      horarioRacha:horarioSelecionado
+    });
   }
 
 }

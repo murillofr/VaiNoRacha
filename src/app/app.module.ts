@@ -12,6 +12,7 @@ import { ConquistasPage } from './../pages/conquistas/conquistas';
 import { ConfiguracoesPage } from './../pages/configuracoes/configuracoes';
 import { AjudaPage } from './../pages/ajuda/ajuda';
 import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
+import { RachasPage } from './../pages/rachas/rachas';
 
 import { HomeService } from './../service/rest/home-service';
 import { RachasMarcadosService } from './../service/rest/rachas-marcados-service';
@@ -32,7 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConquistasPage,
     ConfiguracoesPage,
     AjudaPage,
-    SobreNosPage
+    SobreNosPage,
+    RachasPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConquistasPage,
     ConfiguracoesPage,
     AjudaPage,
-    SobreNosPage
+    SobreNosPage,
+    RachasPage
   ],
   providers: [
     StatusBar,

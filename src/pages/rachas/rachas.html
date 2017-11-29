@@ -1,0 +1,51 @@
+<!--
+  Generated template for the RachasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>rachas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="body">
+
+  <ion-card>
+
+    <ion-item>
+      <ion-icon class="fa-futbol-o" item-start></ion-icon>
+      <h3>{{ quadra.nome }}</h3>
+    </ion-item>
+
+    <ion-item (tap)="tapEvent()" class="clickEndereco">
+      <ion-icon class="fa-map-signs" item-start></ion-icon>
+      <h3>{{ quadra.endereco }}</h3>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="fa-phone" item-start></ion-icon>
+      <h3>{{ quadra.telefone }}</h3>
+      <button ion-button item-end color="secondary" (tap)="tapEvent()">
+        LIGAR
+      </button>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon class="fa-clock-o" item-start></ion-icon>
+      <h3>{{ data }}</h3>
+      <h3>{{ horario.horarioInicio }} - {{ horario.horarioFim }}</h3>
+    </ion-item>
+
+    <hr>
+
+    <ion-item>
+      <button ion-button color="secondary" default block (click)="showConfirm()">MARCHAR RACHA</button>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>
