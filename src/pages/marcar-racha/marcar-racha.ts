@@ -21,6 +21,7 @@ export class MarcarRachaPage {
 
   private todosHorarios: Array<any>;
   private horariosPesquisados: Array<any>;
+  private marcouRacha = false;
 
   constructor(
     public navCtrl: NavController,
@@ -36,6 +37,17 @@ export class MarcarRachaPage {
     dataSelecionada = null;
     horarioSelecionado = null;
     this.encontrarTodosHorarios();
+  }
+
+  ionViewWillEnter() {
+    if (this.marcouRacha) {
+      this.limparHorariosPesquisados();
+    }
+  }
+
+  limparHorariosPesquisados() {
+    this.horariosPesquisados = [];
+    this.marcouRacha = false;
   }
 
   encontrarTodosHorarios() {
@@ -66,7 +78,7 @@ export class MarcarRachaPage {
     });
 
     loading.present();
-    
+
     this.marcarRachaService.pesquisarPorHorario(id, data).subscribe(
       data => {
         this.horariosPesquisados = data;
@@ -78,7 +90,7 @@ export class MarcarRachaPage {
       () => {
         loading.dismiss();
         console.log('Horários pesquisados foram encontrados');
-        document.getElementById('divResultadosPorHorario').setAttribute("style", "height: 100%;");
+        // document.getElementById('divResultadosPorHorario').setAttribute("style", "height: 100%;");
       }
     );
   }
@@ -92,7 +104,6 @@ export class MarcarRachaPage {
   }
 
   pesquisarRachaHorario() {
-
     if ((dataSelecionada !== null) && (horarioSelecionado !== null)) {
       this.pesquisarPorHorario(horarioSelecionado.id, dataSelecionada);
       console.log(dataSelecionada);
@@ -104,7 +115,6 @@ export class MarcarRachaPage {
         this.exibirToast("Horário é obrigatório");
       }
     }
-
   }
 
   exibirToast(msg) {
@@ -117,10 +127,18 @@ export class MarcarRachaPage {
   }
 
   pushPageRachas(quadra): void {
-    this.navCtrl.push(RachasPage,{
-      quadra:quadra,
-      dataRacha:dataSelecionada,
-      horarioRacha:horarioSelecionado
+    this.navCtrl.push(RachasPage, {
+      callback: this.myCallbackFunction,
+      quadra: quadra,
+      dataRacha: dataSelecionada,
+      horarioRacha: horarioSelecionado
+    });
+  }
+
+  myCallbackFunction = (_params) => {
+    return new Promise((resolve, reject) => {
+      this.marcouRacha = _params;
+      resolve();
     });
   }
 
