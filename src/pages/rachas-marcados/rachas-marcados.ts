@@ -7,12 +7,13 @@ import {
   ToastController,
   AlertController
 } from 'ionic-angular';
-import { RachasMarcadosService } from './../../service/rest/rachas-marcados-service';
+import { HerokuProvider } from './../../providers/heroku/heroku';
 
 @IonicPage()
 @Component({
   selector: 'page-rachas-marcados',
   templateUrl: 'rachas-marcados.html',
+  providers: [HerokuProvider]
 })
 export class RachasMarcadosPage {
 
@@ -24,7 +25,7 @@ export class RachasMarcadosPage {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
-    public rachasMarcadosService: RachasMarcadosService) {
+    private herokuProvider: HerokuProvider) {
     
   }
 
@@ -40,7 +41,7 @@ export class RachasMarcadosPage {
 
     loading.present();
 
-    this.rachasMarcadosService.encontrarRachasMarcados().subscribe(
+    this.herokuProvider.encontrarRachasMarcados().subscribe(
       data => {
         this.rachasMarcados = data;
         console.log(data);

@@ -24,13 +24,15 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-import { HomeService } from './../../service/rest/home-service';
+import { HerokuProvider } from './../../providers/heroku/heroku';
+// import { HomeService } from './../../service/rest/home-service';
 
 declare var google;
 
 @Component({
   selector: 'home-page',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers: [HerokuProvider]
 })
 export class HomePage {
 
@@ -46,7 +48,8 @@ export class HomePage {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public geolocation: Geolocation,
-    public homeService: HomeService) {
+    // public homeService: HomeService,
+    private herokuProvider: HerokuProvider) {
 
   }
 
@@ -152,7 +155,7 @@ export class HomePage {
 
       // Variável que define a estrutura do HTML a inserir na Info Window.
       var iwContent = '<div id="iw_container">' +
-      '<p class="iw_title">Você está aqui</div>';
+        '<p class="iw_title">Você está aqui</div>';
 
       // O conteúdo da variável iwContent é inserido na Info Window.
       this.infoWindow.setContent(iwContent);
@@ -178,7 +181,7 @@ export class HomePage {
 
     loading.present();
 
-    this.homeService.encontrarQuadras().subscribe(
+    this.herokuProvider.encontrarQuadras().subscribe(
       data => {
         this.quadras = data;
         console.log(data);

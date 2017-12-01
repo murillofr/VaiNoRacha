@@ -6,7 +6,7 @@ import {
   LoadingController,
   ToastController
 } from 'ionic-angular';
-import { MarcarRachaService } from './../../service/rest/marcar-racha-service';
+import { HerokuProvider } from './../../providers/heroku/heroku';
 import { RachasPage } from './../rachas/rachas';
 
 var dataSelecionada = null;
@@ -16,6 +16,7 @@ var horarioSelecionado = null;
 @Component({
   selector: 'page-marcar-racha',
   templateUrl: 'marcar-racha.html',
+  providers: [HerokuProvider]
 })
 export class MarcarRachaPage {
 
@@ -28,7 +29,7 @@ export class MarcarRachaPage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public marcarRachaService: MarcarRachaService) {
+    private herokuProvider: HerokuProvider) {
 
   }
 
@@ -57,7 +58,7 @@ export class MarcarRachaPage {
 
     loading.present();
 
-    this.marcarRachaService.encontrarTodosHorarios().subscribe(
+    this.herokuProvider.encontrarTodosHorarios().subscribe(
       data => {
         this.todosHorarios = data;
         console.log(data);
@@ -79,7 +80,7 @@ export class MarcarRachaPage {
 
     loading.present();
 
-    this.marcarRachaService.pesquisarPorHorario(id, data).subscribe(
+    this.herokuProvider.pesquisarPorHorario(id, data).subscribe(
       data => {
         this.horariosPesquisados = data;
         console.log(data);
