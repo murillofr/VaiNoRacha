@@ -3,6 +3,7 @@ import {
   IonicPage,
   NavController,
   NavParams,
+  LoadingController,
   ToastController,
   AlertController
 } from 'ionic-angular';
@@ -27,6 +28,7 @@ export class RachasPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     private herokuProvider: HerokuProvider) { }
@@ -78,12 +80,19 @@ export class RachasPage {
     this.data.idHorario = this.horarioRacha.id;
     this.data.dataRacha = this.dataRacha;
 
+    let loading = this.loadingCtrl.create({
+      content: 'Reservando racha...'
+    });
+    loading.present();
+
     console.log(this.data);
     this.herokuProvider.postRacha(this.data).subscribe(data => {
       console.log('resposta', data);
     }, error => {
-      if (error['status'] == 201)
+      if (error['status'] == 201) {
+        loading.dismiss();
         this.showAlert();
+      }
       else
         console.log("Oooops!", error);
     });
@@ -111,7 +120,7 @@ export class RachasPage {
 
   ionViewWillLeave() {
     this.callback(this.marcouRacha).then(() => {
-      
+
     });
   }
 

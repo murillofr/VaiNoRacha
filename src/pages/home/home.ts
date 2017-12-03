@@ -178,7 +178,6 @@ export class HomePage {
     let loading = this.loadingCtrl.create({
       content: 'Carregando mapa...'
     });
-
     loading.present();
 
     this.herokuProvider.encontrarQuadras().subscribe(
@@ -212,11 +211,13 @@ export class HomePage {
       var id = this.quadras[i].id;
       var latlng = new google.maps.LatLng(coordenadasSplit[0], coordenadasSplit[1]);
       var nome = this.quadras[i].nome;
-      var endereco = this.quadras[i].endereco;
+      var logadouro = this.quadras[i].logadouro;
+      var numero = this.quadras[i].numero;
+      var bairro = this.quadras[i].bairro;
       var telefone = this.quadras[i].telefone;
       var diasFuncionamento = this.quadras[i].diasFuncionamento;
 
-      this.createMarker(id, latlng, nome, endereco, telefone, diasFuncionamento);
+      this.createMarker(id, latlng, nome, logadouro, numero, bairro, telefone, diasFuncionamento);
 
       // Os valores de latitude e longitude do marcador são adicionados à
       // variável bounds
@@ -234,7 +235,7 @@ export class HomePage {
 
   }
 
-  createMarker(id, latlng, nome, endereco, telefone, diasFuncionamento) {
+  createMarker(id, latlng, nome, logadouro, numero, bairro, telefone, diasFuncionamento) {
     var id = id;
     var image = './../../assets/icon/MarkerRachaSmall.png';
     var marker = new google.maps.Marker({
@@ -263,12 +264,18 @@ export class HomePage {
       // Cria a nova Info Window com referência à variável infoWindow.
       this.infoWindow = new google.maps.InfoWindow();
 
+      var diasFuncionamentoEditado = diasFuncionamento.split(', ').join('<br />');
+
       // Variável que define a estrutura do HTML a inserir na Info Window.
       var iwContent = '<div id="iw_container">' +
-        '<p class="iw_title">' + nome + '</p>' +
-        '<p class="iw_content">' + endereco + '<br />' +
-        telefone + '<br />' + 'Dias de Funcionamento:' + '<br />' +
-        diasFuncionamento + '</p><hr>' +
+        '<p class="iw_title">' + 
+        nome + '</p>' +
+        '<p class="iw_content">' + 
+        logadouro + ', ' + numero + '<br />' +
+        bairro + '<br />' +
+        telefone + '<br />' + 
+        'Dias de Funcionamento:' + '<br />' +
+        diasFuncionamentoEditado + '</p><hr>' +
         '<button id="idBotao" class="btMarcarRacha">MARCAR RACHA</button>' +
         '</div>';
 

@@ -5,7 +5,8 @@ import {
   NavParams,
   LoadingController,
   ToastController,
-  AlertController
+  AlertController,
+  ItemSliding
 } from 'ionic-angular';
 import { HerokuProvider } from './../../providers/heroku/heroku';
 
@@ -26,7 +27,7 @@ export class RachasMarcadosPage {
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
     private herokuProvider: HerokuProvider) {
-    
+
   }
 
   ionViewDidLoad() {
@@ -38,7 +39,6 @@ export class RachasMarcadosPage {
     let loading = this.loadingCtrl.create({
       content: 'Carregando rachas...'
     });
-
     loading.present();
 
     this.herokuProvider.encontrarRachasMarcados().subscribe(
@@ -65,9 +65,24 @@ export class RachasMarcadosPage {
     toast.present();
   }
 
-  showConfirm() {
+  avisarRacha(racha) {
+    var classeOld = document.getElementById(racha.id).className;
+    if (classeOld.indexOf('-slash-o') > 0) {
+      document.getElementById(racha.id).className = classeOld.replace('-slash-o', '');
+      this.tapEvent();
+    } else {
+      document.getElementById(racha.id).className = classeOld.replace('fa-bell', 'fa-bell-slash-o');
+    }
+  }
+
+  compartilharRacha(slidingItem: ItemSliding, racha) {
+    console.log(racha);
+    slidingItem.close();
+  }
+
+  showConfirm(slidingItem: ItemSliding, racha) {
     let confirm = this.alertCtrl.create({
-      title: 'Você deseja cancelar esse Racha?',
+      title: 'Deseja cancelar esse Racha?',
       subTitle: 'Essa ação não poderá ser desfeita.',
       buttons: [
         {
@@ -81,6 +96,13 @@ export class RachasMarcadosPage {
           text: 'SIM',
           handler: () => {
             console.log('SIM clicado');
+
+            let loading = this.loadingCtrl.create({
+              content: 'Deletando racha...'
+            });
+            loading.present();
+
+            this.deletarRacha(slidingItem, racha, loading);
           }
         }
       ]
@@ -88,14 +110,28 @@ export class RachasMarcadosPage {
     confirm.present();
   }
 
-  avisarRacha(racha) {
-    var classeOld = document.getElementById(racha.id).className;
-    if (classeOld.indexOf('-slash-o') > 0) {
-      document.getElementById(racha.id).className = classeOld.replace('-slash-o','');
-      this.tapEvent();
-    }else {
-      document.getElementById(racha.id).className =  classeOld.replace('fa-bell','fa-bell-slash-o');
-    }
+  deletarRacha(slidingItem: ItemSliding, racha, loading) {
+    this.herokuProvider.deletarRacha(racha.id).subscribe(data => {
+      loading.dismiss();
+      this.showAlert(slidingItem);
+    }, error => {
+      console.log("Oooops! Erro ao deletar racha", error);
+    });
+  }
+
+  showAlert(slidingItem: ItemSliding) {
+    let alert = this.alertCtrl.create({
+      title: 'Tudo certo!',
+      subTitle: 'Racha deletado com sucesso.',
+      enableBackdropDismiss: false,
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          this.encontrarRachasMarcados();
+        }
+      }]
+    });
+    alert.present();
   }
 
 }

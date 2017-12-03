@@ -55,7 +55,6 @@ export class MarcarRachaPage {
     let loading = this.loadingCtrl.create({
       content: 'Detectando horários...'
     });
-
     loading.present();
 
     this.herokuProvider.encontrarTodosHorarios().subscribe(
@@ -77,7 +76,6 @@ export class MarcarRachaPage {
     let loading = this.loadingCtrl.create({
       content: 'Localizando quadras...'
     });
-
     loading.present();
 
     this.herokuProvider.pesquisarPorHorario(id, data).subscribe(

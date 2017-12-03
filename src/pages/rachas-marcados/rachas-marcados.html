@@ -54,11 +54,40 @@
       </button>
     </ion-item>
 
-    <hr>
-
-    <ion-item>
+    <!-- <ion-item>
       <button ion-button color="danger" default block (click)="showConfirm()">CANCELAR RACHA</button>
-    </ion-item>
+    </ion-item> -->
+
+    <ion-list>
+      <ion-item-sliding #slidingItem id="teste">
+
+        <ion-item>
+          <ion-grid>
+            <ion-row align-items-center>
+              <ion-col col-auto>
+                <ion-icon class="fa-hand-o-left iconsliding"></ion-icon>
+              </ion-col>
+              <ion-col class="itemSliding">
+                OPÇÕES
+              </ion-col>
+              <ion-col col-auto>
+                <ion-icon class="fa-hand-o-left iconsliding"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+
+        <ion-item-options>
+          <button ion-button color="primary" large (click)="compartilharRacha(slidingItem, rachaMarcado)">
+            <ion-icon class="fa-share-alt btSliding"></ion-icon>
+          </button>
+          <button ion-button color="danger" large (click)="showConfirm(slidingItem, rachaMarcado)">
+            <ion-icon class="fa-trash-o btSliding"></ion-icon>
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+    </ion-list>
 
   </ion-card>
 

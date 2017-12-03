@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>rachas</ion-title>
+    <ion-title>Rachas</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,7 +17,8 @@
 
     <ion-item (tap)="tapEvent()" class="clickEndereco">
       <ion-icon class="fa-map-signs" item-start></ion-icon>
-      <h3>{{ quadra.endereco }}</h3>
+      <h3>{{ quadra.logadouro }}, {{ quadra.numero }}</h3>
+      <p>{{ quadra.bairro }}</p>
     </ion-item>
 
     <ion-item>

@@ -21,24 +21,28 @@ export class HerokuProvider {
   }
 
   //--------------- GET ---------------
+  // Usado em: Home
   encontrarQuadras() {
     var url = `${this.basepath}/quadras`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
+  // Usado em: Rachas Marcados
   encontrarRachasMarcados() {
     var url = `${this.basepath}/usuarios/rachas/3`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
+  // Usado em: Marcar Racha
   encontrarTodosHorarios() {
     var url = `${this.basepath}/horarios/`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
+  // Usado em: Marcar Racha
   pesquisarPorHorario(id, data) {
     var url = `${this.basepath}/quadras/disponiveis?horarioId=${id}&data=${data}`;
     var response = this.http.get(url).map(res => res.json());
@@ -47,6 +51,7 @@ export class HerokuProvider {
 
 
   //--------------- POST ---------------
+  // Usado em: Rachas
   postRacha(data) {
     var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
     var myData = JSON.stringify({
@@ -58,6 +63,15 @@ export class HerokuProvider {
     });
     console.log(myData);
     return this.httpClient.post(this.basepath + '/rachas', myData, { headers: headers });
+  }
+
+
+  //--------------- DELETE ---------------
+  // Usado em: Rachas Marcados
+  deletarRacha(id) {
+    var url = `${this.basepath}/rachas/${id}`;
+    var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
+    return this.httpClient.delete(url, { headers: headers });
   }
 
 }

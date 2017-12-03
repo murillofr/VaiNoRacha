@@ -8,3 +8,28 @@ ion-item ion-icon {
 .clickEndereco {
     cursor: pointer;
 }
+
+ion-item-sliding {
+    cursor: pointer;
+    border-top: 1px solid #c8c7cc;
+}
+
+.iconsliding {
+    font-size: 1.5em;
+}
+
+.itemSliding {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+}
+
+ion-item-options {
+    padding-top: 1px;
+    padding-right: 1px;
+}
+
+.btSliding {
+    color: #fff;
+    margin-top: 2vw;
+}
