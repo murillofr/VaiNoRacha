@@ -1,0 +1,35 @@
+page-quadra-infos {
+
+}
+
+ion-item ion-icon {
+    width: 10vw;
+}
+
+.clickEndereco {
+    cursor: pointer;
+}
+
+hr {
+    margin: 1px;
+}
+
+.quadraAberta, .quadraFechada {
+    text-align: center;
+}
+
+.quadraAberta ion-icon, .quadraFechada ion-icon {
+    margin-left: -8px;
+}
+
+.spanDiasSemana {
+    font-size: 4vw;
+    margin-left: -5px;
+}
+.quadraAberta ion-icon, .quadraAberta .spanDiasSemana {
+    color: #488aff;
+}
+.quadraFechada ion-icon, .quadraFechada .spanDiasSemana {
+    color: #f53d3d;
+}
+

@@ -13,6 +13,7 @@ import { ConquistasPage } from './../pages/conquistas/conquistas';
 import { ConfiguracoesPage } from './../pages/configuracoes/configuracoes';
 import { AjudaPage } from './../pages/ajuda/ajuda';
 import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
+import { QuadraInfosPage } from './../pages/quadra-infos/quadra-infos';
 import { RachasPage } from './../pages/rachas/rachas';
 
 import { HomeService } from './../service/rest/home-service';
@@ -36,6 +37,7 @@ import { HerokuProvider } from '../providers/heroku/heroku';
     ConfiguracoesPage,
     AjudaPage,
     SobreNosPage,
+    QuadraInfosPage,
     RachasPage
   ],
   imports: [
@@ -55,6 +57,7 @@ import { HerokuProvider } from '../providers/heroku/heroku';
     ConfiguracoesPage,
     AjudaPage,
     SobreNosPage,
+    QuadraInfosPage,
     RachasPage
   ],
   providers: [

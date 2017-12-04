@@ -49,6 +49,13 @@ export class HerokuProvider {
     return response;
   }
 
+  // Usado em: Quadra Infos
+  encontrarQuadra(id) {
+    var url = `${this.basepath}/quadras/${id}`;
+    var response = this.http.get(url).map(res => res.json());
+    return response;
+  }
+
 
   //--------------- POST ---------------
   // Usado em: Rachas

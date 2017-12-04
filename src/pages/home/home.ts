@@ -25,6 +25,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HerokuProvider } from './../../providers/heroku/heroku';
+import { QuadraInfosPage } from './../quadra-infos/quadra-infos';
 // import { HomeService } from './../../service/rest/home-service';
 
 declare var google;
@@ -304,7 +305,9 @@ export class HomePage {
   }
 
   marcarRacha(id) {
-    console.log(id);
+    this.navCtrl.push(QuadraInfosPage, {
+      id: id
+    });
   }
 
 }
