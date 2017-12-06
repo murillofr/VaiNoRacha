@@ -56,9 +56,16 @@ export class HerokuProvider {
     return response;
   }
 
+  // Usado em: Quadra Infos
+  pesquisarHorariosDisponiveis(id, data) {
+    var url = `${this.basepath}/horarios/desbloqueados?quadraId=${id}&data=${data}`;
+    var response = this.http.get(url).map(res => res.json());
+    return response;
+  }
+
 
   //--------------- POST ---------------
-  // Usado em: Rachas
+  // Usado em: Rachas, Quadra Infos
   postRacha(data) {
     var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
     var myData = JSON.stringify({

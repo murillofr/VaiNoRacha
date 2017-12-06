@@ -10,6 +10,7 @@ import {
 import { HerokuProvider } from './../../providers/heroku/heroku';
 
 var dataSelecionada = null;
+var diaSemanaSelecionado: String;
 
 @IonicPage()
 @Component({
@@ -19,10 +20,14 @@ var dataSelecionada = null;
 })
 export class QuadraInfosPage {
 
+  dataPost: any = {};
+
   private quadraInfos: any = {};
   private idParam = this.navParams.data.id;
   private diasFuncionamentoArray = [];
   private terminouCarregar = false;
+  private diaInvalido = false;
+  private horariosPesquisados: Array<any>;
 
   constructor(
     public navCtrl: NavController,
@@ -102,17 +107,26 @@ export class QuadraInfosPage {
   }
 
   onDataSelecionada(data) {
+    // Inverte data para padrão brasileiro
     dataSelecionada = data.split('-').reverse().join('/');
-  }
 
-  pesquisarHorarios() {
-    if (dataSelecionada !== null) {
-      console.log("Clicou para pesquisar Horários disponíveis.");
-      // this.pesquisarPorHorario(horarioSelecionado.id, dataSelecionada);
-      console.log(dataSelecionada);
+    // Cria vetor para descobrir qual dia da semana foi selecionado
+    var semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"];
+    var arr = dataSelecionada.split("/");
+    var contat = arr[1] + ' ' + arr[0] + ', ' + arr[2] + ' 00:00:00';
+    var teste = new Date(contat);
+    var dia = teste.getDay();
+    diaSemanaSelecionado = semana[dia];
+
+    // Bloqueia botão caso o dia seja inválido
+    if (this.diasFuncionamentoArray.indexOf(diaSemanaSelecionado) !== -1) {
+      this.diaInvalido = false;
     } else {
-      this.exibirToast("Data é obrigatória");
+      this.diaInvalido = true;
+      this.horariosPesquisados = [];
+      this.exibirToast("Quadra fechada no dia selecionado");
     }
+
   }
 
   exibirToast(msg) {
@@ -122,6 +136,111 @@ export class QuadraInfosPage {
       position: 'bottom'
     });
     toast.present();
+  }
+
+  tapEvent() {
+    let toast = this.toastCtrl.create({
+      message: 'Em construção',
+      duration: 500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  pesquisarHorarios() {
+    if (dataSelecionada !== null) {
+      console.log(dataSelecionada);
+      this.pesquisarHorariosDisponiveis(this.idParam, dataSelecionada);
+    } else {
+      this.exibirToast("Data é obrigatória");
+    }
+  }
+
+  pesquisarHorariosDisponiveis(id, data) {
+    let loading = this.loadingCtrl.create({
+      content: 'Localizando quadras...'
+    });
+    loading.present();
+
+    this.herokuProvider.pesquisarHorariosDisponiveis(id, data).subscribe(
+      data => {
+        this.horariosPesquisados = data;
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        loading.dismiss();
+        console.log('Horários disponíveis foram encontrados');
+        // document.getElementById('divResultadosPorHorario').setAttribute("style", "height: 100%;");
+      }
+    );
+  }
+
+  showConfirm(horario) {
+    let confirm = this.alertCtrl.create({
+      title: 'Você deseja marcar esse Racha?',
+      subTitle: horario.horarioInicio + ' - ' + horario.horarioFim,
+      buttons: [
+        {
+          text: 'NÃO',
+          role: 'cancel',
+          handler: () => {
+            console.log('NÃO clicado');
+          }
+        },
+        {
+          text: 'SIM',
+          handler: () => {
+            console.log('SIM clicado');
+            this.submit(horario);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  submit(horario) {
+
+    this.dataPost.idUsuario = 3
+    this.dataPost.idQuadra = this.idParam;
+    this.dataPost.idHorario = horario.id;
+    this.dataPost.dataRacha = dataSelecionada;
+
+    let loading = this.loadingCtrl.create({
+      content: 'Reservando racha...'
+    });
+    loading.present();
+
+    console.log(this.dataPost);
+    this.herokuProvider.postRacha(this.dataPost).subscribe(data => {
+      console.log('resposta', data);
+    }, error => {
+      if (error['status'] == 201) {
+        loading.dismiss();
+        this.showAlert();
+      }
+      else
+        console.log("Oooops!", error);
+    });
+  }
+
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Oh Yeah!',
+      subTitle: 'Racha criado com sucesso.',
+      enableBackdropDismiss: false,
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          console.log("Racha foi criado com sucesso.");
+          this.horariosPesquisados = [];
+        }
+      }]
+    });
+    alert.present();
   }
 
 }

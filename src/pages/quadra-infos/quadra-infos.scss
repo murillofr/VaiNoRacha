@@ -14,6 +14,16 @@ hr {
     margin: 1px;
 }
 
+.pDias {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.itemDias {
+    background-color: transparent;
+    margin-top: -15px;
+}
+
 .quadraAberta, .quadraFechada {
     text-align: center;
 }
@@ -31,5 +41,9 @@ hr {
 }
 .quadraFechada ion-icon, .quadraFechada .spanDiasSemana {
     color: #f53d3d;
+}
+
+ion-datetime{
+    font-size: 4.5vw;
 }
 
