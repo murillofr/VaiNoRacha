@@ -63,6 +63,13 @@ export class HerokuProvider {
     return response;
   }
 
+  // Usado em: Marcar Racha
+  pesquisarQuadraPorNome(nome) {
+    var url = `${this.basepath}/quadras/quadra?nome=${nome}`;
+    var response = this.http.get(url).map(res => res.json());
+    return response;
+  }
+
 
   //--------------- POST ---------------
   // Usado em: Rachas, Quadra Infos

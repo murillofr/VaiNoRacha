@@ -9,6 +9,7 @@ import {
   ItemSliding
 } from 'ionic-angular';
 import { HerokuProvider } from './../../providers/heroku/heroku';
+import { MarcarRachaPage } from './../marcar-racha/marcar-racha';
 
 @IonicPage()
 @Component({
@@ -17,6 +18,8 @@ import { HerokuProvider } from './../../providers/heroku/heroku';
   providers: [HerokuProvider]
 })
 export class RachasMarcadosPage {
+
+  pageMarcarRacha = { title: 'Marcar Racha', component: MarcarRachaPage };
 
   private rachasMarcados: Array<any>;
 
@@ -52,8 +55,17 @@ export class RachasMarcadosPage {
       () => {
         console.log('Todos os rachas marcados foram encontrados');
         loading.dismiss();
+        this.temRacha();
       }
     );
+  }
+
+  temRacha() {
+    if (this.rachasMarcados.length == 0) {
+      document.getElementById("divContentSemRacha").setAttribute("class", "aparecer");
+    } else {
+      document.getElementById("divContentSemRacha").setAttribute("class", "esconder");
+    }
   }
 
   tapEvent() {
@@ -77,6 +89,7 @@ export class RachasMarcadosPage {
 
   compartilharRacha(slidingItem: ItemSliding, racha) {
     console.log(racha);
+    this.tapEvent();
     slidingItem.close();
   }
 
@@ -132,6 +145,10 @@ export class RachasMarcadosPage {
       }]
     });
     alert.present();
+  }
+
+  goMarcarRachaPage() {
+    this.navCtrl.setRoot(this.pageMarcarRacha.component);
   }
 
 }

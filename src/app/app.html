@@ -45,7 +45,7 @@
 
       <hr>
 
-      <button menuClose ion-item no-lines>
+      <button menuClose ion-item no-lines (click)="tapEvent()">
         <ion-icon class="fa-share-alt" item-start></ion-icon>
         Compartilhar
       </button>
@@ -55,14 +55,14 @@
         Configurações
       </button>
 
-      <button menuClose ion-item no-lines (click)="openPage(pages[6])">
-        <ion-icon class="fa-question-circle" item-start></ion-icon>
-        Ajuda
+      <button menuClose ion-item no-lines (click)="openPage(pages[7])">
+        <ion-icon class="fa-user-circle-o" item-start></ion-icon>
+        Sobre
       </button>
 
-      <button menuClose ion-item no-lines (click)="openPage(pages[7])">
-        <ion-icon class="fa-users" item-start></ion-icon>
-        Sobre nós
+      <button menuClose ion-item no-lines (click)="tapEvent()">
+        <ion-icon class="fa-sign-out" item-start></ion-icon>
+        Logout
       </button>
 
       <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">

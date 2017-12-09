@@ -40,3 +40,27 @@ hr {
     margin-top: 3px;
     margin-bottom: 3px;
 }
+
+ion-item ion-icon {
+    width: 10vw;
+}
+
+.searchbar-md .searchbar-input::-webkit-input-placeholder,
+.searchbar-ios .searchbar-input::-webkit-input-placeholder,
+.searchbar-wp .searchbar-input::-webkit-input-placeholder { 
+    font-size: 4.2vw;
+}
+
+ion-datetime {
+    font-size: 4.2vw;
+}
+
+ion-item-sliding {
+    cursor: pointer;
+    border-top: 1px solid #c8c7cc;
+}
+
+ion-item-options {
+    padding-top: 1px;
+    padding-right: 1px;
+}

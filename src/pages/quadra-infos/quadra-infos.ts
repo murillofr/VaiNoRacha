@@ -107,6 +107,12 @@ export class QuadraInfosPage {
   }
 
   onDataSelecionada(data) {
+
+    // Apaga lista de horarios caso troque a data antes de pesquisar
+    if (dataSelecionada !== data.split('-').reverse().join('/')) {
+      this.horariosPesquisados = [];
+    }
+
     // Inverte data para padrão brasileiro
     dataSelecionada = data.split('-').reverse().join('/');
 

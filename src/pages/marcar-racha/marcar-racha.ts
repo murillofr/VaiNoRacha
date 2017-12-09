@@ -1,3 +1,4 @@
+// import { Component, ViewChild } from '@angular/core';
 import { Component } from '@angular/core';
 import {
   IonicPage,
@@ -8,6 +9,7 @@ import {
 } from 'ionic-angular';
 import { HerokuProvider } from './../../providers/heroku/heroku';
 import { RachasPage } from './../rachas/rachas';
+import { QuadraInfosPage } from './../quadra-infos/quadra-infos';
 
 var dataSelecionada = null;
 var horarioSelecionado = null;
@@ -19,8 +21,12 @@ var horarioSelecionado = null;
   providers: [HerokuProvider]
 })
 export class MarcarRachaPage {
+  searchRacha: string = "quadra";
+
+  // @ViewChild('searchBar') myInput;
 
   private todosHorarios: Array<any>;
+  private quadrasPesquisadas: Array<any>;
   private horariosPesquisados: Array<any>;
   private marcouRacha = false;
 
@@ -46,6 +52,10 @@ export class MarcarRachaPage {
     }
   }
 
+  limparQuadrasPesquisadas() {
+    this.quadrasPesquisadas = [];
+  }
+
   limparHorariosPesquisados() {
     this.horariosPesquisados = [];
     this.marcouRacha = false;
@@ -68,8 +78,50 @@ export class MarcarRachaPage {
       () => {
         console.log('Todos os horários foram encontrados');
         loading.dismiss();
+        // loading.dismiss().then(() => { this.myInput.setFocus(); });
       }
     );
+  }
+
+  pesquisarQuadraPorNome(termoBuscado) {
+    let loading = this.loadingCtrl.create({
+      content: 'Localizando...'
+    });
+    loading.present();
+
+    this.herokuProvider.pesquisarQuadraPorNome(termoBuscado).subscribe(
+      data => {
+        this.quadrasPesquisadas = data;
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        loading.dismiss();
+        // loading.dismiss().then(() => { this.myInput.setFocus(); });
+        console.log('Quadras pesquisadas foram encontradas');
+        // document.getElementById('divResultadosPorHorario').setAttribute("style", "height: 100%;");
+      }
+    );
+  }
+
+  // teste(event) {
+  //   setTimeout(() => {
+  //     this.myInput.setFocus();
+  //    }, 50);
+  // }
+
+  onInputNomeQuadra(termoBuscado) {
+    if (termoBuscado !== "") {
+      this.pesquisarQuadraPorNome(termoBuscado);
+    } else {
+      this.limparQuadrasPesquisadas();
+    }
+  }
+
+  onClearNomeQuadra() {
+    this.limparQuadrasPesquisadas();
   }
 
   pesquisarPorHorario(id, data) {
@@ -95,10 +147,22 @@ export class MarcarRachaPage {
   }
 
   onDataSelecionada(data) {
+
+    // Apaga lista de horarios caso troque a data antes de pesquisar
+    if (dataSelecionada !== data.split('-').reverse().join('/')) {
+      this.horariosPesquisados = [];
+    }
+
+    // Inverte data para padrão brasileiro
     dataSelecionada = data.split('-').reverse().join('/');
   }
 
   onHorarioSelecionado(horario) {
+
+    // Apaga lista de horarios caso troque a data antes de pesquisar
+    if (horarioSelecionado !== horario) {
+      this.horariosPesquisados = [];
+    }
     horarioSelecionado = horario;
   }
 
@@ -131,6 +195,12 @@ export class MarcarRachaPage {
       quadra: quadra,
       dataRacha: dataSelecionada,
       horarioRacha: horarioSelecionado
+    });
+  }
+
+  pushPageQuadraInfos(quadraId): void {
+    this.navCtrl.push(QuadraInfosPage, {
+      id: quadraId
     });
   }
 

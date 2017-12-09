@@ -54,12 +54,8 @@
       </button>
     </ion-item>
 
-    <!-- <ion-item>
-      <button ion-button color="danger" default block (click)="showConfirm()">CANCELAR RACHA</button>
-    </ion-item> -->
-
     <ion-list>
-      <ion-item-sliding #slidingItem id="teste">
+      <ion-item-sliding #slidingItem>
 
         <ion-item>
           <ion-grid>
@@ -90,5 +86,18 @@
     </ion-list>
 
   </ion-card>
+
+  <div id="divContentSemRacha" class="esconder">
+
+    <ion-card>
+      <h3>
+        Nenhum racha encontrado.
+        <div class="espacoVazio"></div>
+        Bora marcar!
+      </h3>
+      <button ion-button color="secondary" default block (click)="goMarcarRachaPage()">MARCHAR RACHA</button>
+    </ion-card>
+
+  </div>
 
 </ion-content>
