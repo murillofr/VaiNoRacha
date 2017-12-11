@@ -3,6 +3,7 @@ import { Nav, Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RachasMarcadosPage } from './../pages/rachas-marcados/rachas-marcados';
@@ -11,6 +12,7 @@ import { ConquistasPage } from './../pages/conquistas/conquistas';
 import { ConfiguracoesPage } from './../pages/configuracoes/configuracoes';
 import { AjudaPage } from './../pages/ajuda/ajuda';
 import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,7 +20,7 @@ import { SobreNosPage } from './../pages/sobre-nos/sobre-nos';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -26,11 +28,13 @@ export class MyApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public toastCtrl: ToastController, ) {
+    public toastCtrl: ToastController,
+    public menuCtrl: MenuController ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
+      { title: 'Login', component: LoginPage },
       { title: 'Mapa', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'Rachas Marcados', component: RachasMarcadosPage },
@@ -48,6 +52,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
+      this.menuCtrl.enable(true);
       this.splashScreen.hide();
     });
   }
@@ -66,6 +71,5 @@ export class MyApp {
     });
     toast.present();
   }
-
 
 }
