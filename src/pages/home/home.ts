@@ -26,6 +26,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HerokuProvider } from './../../providers/heroku/heroku';
 import { QuadraInfosPage } from './../quadra-infos/quadra-infos';
+import { MenuController } from 'ionic-angular/components/app/menu-controller';
 // import { HomeService } from './../../service/rest/home-service';
 
 declare var google;
@@ -50,8 +51,9 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public geolocation: Geolocation,
     // public homeService: HomeService,
-    private herokuProvider: HerokuProvider) {
-
+    private herokuProvider: HerokuProvider,
+    public menuCtrl: MenuController) {
+    this.menuCtrl.enable(true);
   }
 
   ionViewDidLoad() {
@@ -269,12 +271,12 @@ export class HomePage {
 
       // Variável que define a estrutura do HTML a inserir na Info Window.
       var iwContent = '<div id="iw_container">' +
-        '<p class="iw_title">' + 
+        '<p class="iw_title">' +
         nome + '</p>' +
-        '<p class="iw_content">' + 
+        '<p class="iw_content">' +
         logadouro + ', ' + numero + '<br />' +
         bairro + '<br />' +
-        telefone + '<br />' + 
+        telefone + '<br />' +
         'Dias de Funcionamento:' + '<br />' +
         diasFuncionamentoEditado + '</p><hr>' +
         '<button id="idBotao" class="btMarcarRacha">MARCAR RACHA</button>' +

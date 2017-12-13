@@ -1,36 +1,47 @@
-*, *:before, *:after {
-    box-sizing: border-box;
+.bodyLogin {
+    background-color: #1e1e1e;
+    position: relative;
 }
 
-body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+#svgLogin {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 130px;
+    max-height: 130px;
 }
 
-.container{
-    padding: 1px 0;
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(10,10,10,.68);
-    background-size: cover;
-    color: #fff;
-    font-family: "Comfortaa", "Helvetica", sans-serif;
+#svgLogin_background,.svgLogin_letterr {
+    transform-origin: 50% 50%;
+    opacity: 1;
+}
+
+#svgLogin_background {
+    fill: #FFFFFF;
+    transform: scale(1.1,1.1);
+}
+
+.svgLogin_letter {
+    fill: #1e1e1e;
 }
 
 .login {
     max-width: 280px;
-    min-height: 100%;
-    margin: 30px auto;
+    top: 45%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0%);
+    animation: login-animation 1s ease-in-out;
+    opacity: 1;
 }
-
-.login-icon-field {
-    height: 250px;
-    width: 100%;
-}
-
-.login-icon {
-margin: 50px 65px;
+@keyframes login-animation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .login-form {
@@ -52,7 +63,7 @@ margin: 50px 65px;
     border-bottom: 1px solid #fff;
 }
 
-.button {
+.logar {
     display: block;
     width: 240px;
     height: 40px;
@@ -61,18 +72,17 @@ margin: 50px 65px;
     color: #fff;
     background-color: #22c08a;
     border: none;
-    transition: background-color .10s ease-in-out;
     -webkit-user-select:none;
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
 }
 
-.button:hover {
+.logar:hover {
     background-color: #26d69a;
 }
 
-.button:active {
+.logar:active {
     background-color: #1eaa7a;
 }
 
@@ -86,15 +96,15 @@ margin: 50px 65px;
     stroke-miterlimit: 10;
     stroke-dasharray: 300;
     stroke-dashoffset: 300;
-    -webkit-animation: dash 3s .3s linear forwards;
-    animation: dash 3s .3s linear forwards;
+    -webkit-animation: dash 1s .3s linear forwards;
+    animation: dash 1s .3s linear forwards;
 }
 
 .input {
     position: absolute;
-    width: 220px;
+    width: 180px;
     height: 30px;
-    margin: -10px 0px 0px 35%;
+    margin: -10px 0px 0px 25%;
     background: transparent;
     border: none;
     color: #fff;
@@ -102,7 +112,7 @@ margin: 50px 65px;
 }
 
 .input:focus,
-button:focus {
+.logar:focus {
     outline: none;
 }
 
@@ -115,8 +125,8 @@ button:focus {
 }
 
 .user-icon .user-path {
-    -webkit-animation: dash 3s .8s linear forwards;
-    animation: dash 3s .8s linear forwards;
+    -webkit-animation: dash 1s .3s linear forwards;
+    animation: dash 1s .3s linear forwards;
 }
 
 .call-to-action {
@@ -139,7 +149,7 @@ p a {
 }
 
 @-webkit-keyframes dash {
-to {
+    to {
         stroke-dashoffset: 0;
     }
 }

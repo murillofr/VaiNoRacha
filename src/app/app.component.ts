@@ -3,6 +3,7 @@ import { Nav, Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { SplashPage } from './../pages/splash/splash';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
@@ -20,7 +21,7 @@ import { MenuController } from 'ionic-angular/components/app/menu-controller';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = SplashPage;
 
   pages: Array<{ title: string, component: any }>;
 
@@ -34,7 +35,6 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Login', component: LoginPage },
       { title: 'Mapa', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'Rachas Marcados', component: RachasMarcadosPage },
@@ -42,7 +42,8 @@ export class MyApp {
       { title: 'Conquistas', component: ConquistasPage },
       { title: 'Configurações', component: ConfiguracoesPage },
       { title: 'Ajuda', component: AjudaPage },
-      { title: 'Sobre Nós', component: SobreNosPage }
+      { title: 'Sobre Nós', component: SobreNosPage },
+      { title: 'Login', component: LoginPage }
     ];
 
   }
@@ -52,7 +53,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.menuCtrl.enable(true);
+      this.menuCtrl.enable(false);
       this.splashScreen.hide();
     });
   }

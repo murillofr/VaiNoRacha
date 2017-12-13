@@ -42,12 +42,28 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage);
       }, error => {
         console.log("Oooops!", error);
+        this.showAlert();
       }
     );
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Usuario ou senha incorretos.',
+      // subTitle: 'Tente novamente.',
+      enableBackdropDismiss: false,
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          console.log("Usuario ou senha incorretos.");
+        }
+      }]
+    });
+    alert.present();
   }
 
 }

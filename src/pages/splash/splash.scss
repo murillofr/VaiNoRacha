@@ -1,0 +1,212 @@
+page-splash {
+    
+}
+
+#bodySplash {
+    background-color: #FFFFFF;
+    position: relative;
+    animation: body-animation 12s ease-in-out;
+}
+@keyframes body-animation {
+    0% {
+        
+    }
+    90% {
+        background-color: #FFFFFF;
+    }
+    100% {
+        background-color: #1e1e1e;
+    }
+}
+
+#Layer_3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 130px;
+    max-height: 130px;
+    animation: svg-animation 12s ease-in-out;
+}
+@keyframes svg-animation {
+    0% {
+        top: 50%;
+    }
+    45% {
+        top: 50%;
+    }
+    85% {
+        top: 30%;
+    }
+    100% {
+        top: 30%;
+    }
+}
+
+#background,.letter {
+    transform-origin: 50% 50%;
+    opacity: 1;
+}
+
+#background {
+    animation: background-animation 12s ease-in-out;
+    fill: #1e1e1e; // #1e1e1e
+}
+
+@keyframes background-animation {
+    0% {
+
+    }
+    45% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1.1,1.1);
+        opacity: 1;
+    }
+    55% {
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    60% {
+        transform: scale(1.1,1.1);
+        opacity: 1;
+    }
+    65% {
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(1.1,1.1);
+        opacity: 1;
+    }
+    75% {
+        transform: scale(1,1);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(1.1,1.1);
+        opacity: 1;
+    }
+    90% {
+        fill: #1e1e1e; // #1e1e1e
+    }
+    100% {
+        transform: scale(1.1,1.1);
+        opacity: 1;
+        fill: #FFFFFF;
+    }
+}
+
+.letter {
+    animation: letter-animation 12s ease-in-out;
+}
+
+@keyframes letter-animation {
+    0% {
+        fill: transparent;
+    }
+    35% {
+        fill: transparent;
+    }
+    40% {
+        fill: #FFFFFF;
+    }
+    90% {
+        fill: #FFFFFF;
+    }
+    100% {
+        fill: #1e1e1e;
+    }
+}
+
+.classCircle {
+    stroke-dasharray: 3023;
+    stroke-dashoffset: -3023;
+    animation: circle-animation 10s ease-in-out;
+    -ms-transform: scale(6, 3); /* IE 9 */
+    -webkit-transform: scale(6, 3); /* Safari */
+    transform: scale(6, 3);
+    transform-origin: 50% 50%;
+    fill: #FFFFFF;
+}
+
+@keyframes circle-animation {
+    0% {
+        -ms-transform: scale(0, 0); /* IE 9 */
+        -webkit-transform: scale(0, 0); /* Safari */
+        transform: scale(0, 0);
+    }
+    10% {
+        -ms-transform: scale(0, 0); /* IE 9 */
+        -webkit-transform: scale(0, 0); /* Safari */
+        transform: scale(0, 0);
+    }
+    50% {
+        -ms-transform: scale(7, 3); /* IE 9 */
+        -webkit-transform: scale(7, 3); /* Safari */
+        transform: scale(7, 3);
+    }
+}
+
+#hexagon-1 {
+    animation: draw-hexagon-1 10s 0s forwards linear;
+    transform-origin: 50% 50%;
+}
+
+@keyframes draw-hexagon-1 {
+    // // Round 1
+    // 0% {
+    //   stroke: #FF0000; //VERMELHO
+    //   stroke-dasharray: 200, 3297;
+    //   stroke-dashoffset: -3297;
+    // }
+    // 10% {
+    //   stroke: #FF0000; //VERMELHO
+    //   stroke-dasharray: 200, 3297;
+    //   stroke-dashoffset: 200;
+    // }
+    // // round end
+    // 10.1% {
+    //   stroke: transparent;
+    // }
+    // 17.5% {
+    //   stroke: transparent;
+    // }
+    // // round two
+    // 17.6% {
+    //   stroke: #00FF00; //VERDE
+    //   stroke-dasharray: 600, 3297;
+    //   stroke-dashoffset: -3297;
+    // }
+    // 27% {
+    //   stroke: #00FF00; //VERDE
+    //   stroke-dasharray: 600, 3297;
+    //   stroke-dashoffset: 600;
+    // }
+    // 27.1% {
+    //   stroke: transparent;
+    // }
+    // 33.4% {
+    //   stroke: transparent;
+    // }
+    0% {
+        stroke: #1e1e1e;
+        stroke-dasharray: 3297;
+        stroke-dashoffset: -3297;
+    }
+    20% {
+        stroke: #1e1e1e;
+        stroke-dasharray: -3297;
+        stroke-dashoffset: 0;
+    }
+    59% {
+        stroke: #1e1e1e;
+    }
+    60% {
+       stroke: transparent;
+    }
+    100% {
+       stroke: transparent;
+    }
+}

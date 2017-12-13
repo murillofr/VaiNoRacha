@@ -1,4 +1,3 @@
-import { LoginPage } from './../pages/login/login';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -6,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
+import { SplashPage } from './../pages/splash/splash';
+import { LoginPage } from './../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { RachasMarcadosPage } from './../pages/rachas-marcados/rachas-marcados';
@@ -30,6 +31,7 @@ import { HerokuProvider } from '../providers/heroku/heroku';
 @NgModule({
   declarations: [
     MyApp,
+    SplashPage,
     LoginPage,
     HomePage,
     ListPage,
@@ -56,6 +58,7 @@ import { HerokuProvider } from '../providers/heroku/heroku';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    SplashPage,
     LoginPage,
     HomePage,
     ListPage,
