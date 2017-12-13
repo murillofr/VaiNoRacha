@@ -15,8 +15,8 @@ export class SplashPage {
   pageLogin = { title: 'Login', component: LoginPage };
 
   // Aqui irá pegar a variável LocalStorage
-  //pageAtiva = 'LOGIN';
-  pageAtiva = 'MAPA';
+  pageAtiva = 'LOGIN';
+  //pageAtiva = 'MAPA';
 
   constructor(
     public navCtrl: NavController,
@@ -28,24 +28,21 @@ export class SplashPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SplashPage');
 
-    clearInterval(teste);
-
     var body = document.getElementById("bodySplash");
 
+    clearInterval(teste);
     var teste = setInterval(() => {
       if (window.getComputedStyle(body).backgroundColor == 'rgb(30, 30, 30)') {
         clearInterval(teste);
-        this.navCtrl.setRoot(this.pageLogin.component);
+
+        if (this.pageAtiva == 'MAPA') {
+          this.navCtrl.setRoot(this.pageMapa.component);
+        } else if (this.pageAtiva == 'LOGIN') {
+          this.navCtrl.setRoot(this.pageLogin.component);
+        }
+
       }
     }, 10);
-
-    // if (this.pageAtiva == 'MAPA') {
-    //     this.navCtrl.setRoot(this.pageMapa.component);
-    // }else if (this.pageAtiva == 'LOGIN') {
-    //   setTimeout(() => {
-    //     this.navCtrl.setRoot(this.pageLogin.component);
-    //   }, 8500000000);
-    // }
 
   }
 
