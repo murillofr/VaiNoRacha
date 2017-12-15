@@ -32,23 +32,30 @@ export class LoginPage {
     public alertCtrl: AlertController,
     private herokuProvider: HerokuProvider,
     public menuCtrl: MenuController) {
-      this.menuCtrl.enable(false);
-    }
-
-  login() {
-    this.herokuProvider.postLogin(this.userData).subscribe(
-      (res) => {
-        console.log('resposta', res);
-        this.navCtrl.setRoot(HomePage);
-      }, error => {
-        console.log("Oooops!", error);
-        this.showAlert();
-      }
-    );
+    this.menuCtrl.enable(false);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  login() {
+      let loading = this.loadingCtrl.create({
+        content: 'Efetuando login...'
+      });
+      loading.present();
+
+      this.herokuProvider.postLogin(this.userData).subscribe(
+        (res) => {
+          loading.dismiss();
+          console.log('resposta', res);
+          this.navCtrl.setRoot(HomePage);
+        }, error => {
+          loading.dismiss();
+          console.log("Oooops!", error);
+          this.showAlert();
+        }
+      );
   }
 
   showAlert() {
@@ -64,6 +71,15 @@ export class LoginPage {
       }]
     });
     alert.present();
+  }
+
+  tapEvent() {
+    let toast = this.toastCtrl.create({
+      message: 'Em construção',
+      duration: 500,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
 }

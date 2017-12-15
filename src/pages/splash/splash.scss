@@ -5,16 +5,16 @@ page-splash {
 #bodySplash {
     background-color: #FFFFFF;
     position: relative;
-    animation: body-animation 12s forwards linear;
+    animation: body-animation 8s forwards linear;
 }
 @keyframes body-animation {
     0% {
         
     }
-    90% {
+    93% { // 7,44s
         background-color: #FFFFFF;
     }
-    100% {
+    100% { // 8s
         background-color: #1e1e1e;
     }
 }
@@ -26,19 +26,19 @@ page-splash {
     transform: translate(-50%, -50%);
     max-width: 130px;
     max-height: 130px;
-    animation: svg-animation 12s forwards linear;
+    animation: svg-animation 8s forwards linear;
 }
 @keyframes svg-animation {
     0% {
         top: 50%;
     }
-    45% {
+    71% { // 5,68s
         top: 50%;
     }
-    85% {
+    87.5% { // 7s
         top: 30%;
     }
-    100% {
+    100% { // 8s
         top: 30%;
     }
 }
@@ -49,7 +49,7 @@ page-splash {
 }
 
 #background {
-    animation: background-animation 12s forwards linear;
+    animation: background-animation 8s forwards linear;
     fill: #1e1e1e; // #1e1e1e
 }
 
@@ -57,41 +57,25 @@ page-splash {
     0% {
 
     }
-    45% {
+    71% { // 5,68s
         transform: scale(1,1);
     }
-    50% {
+    76.5% { // 6,12s
         transform: scale(1.1,1.1);
         opacity: 1;
     }
-    55% {
+    82% { // 6,56s
         transform: scale(1,1);
         opacity: 1;
     }
-    60% {
+    87.5% { // 7s
         transform: scale(1.1,1.1);
         opacity: 1;
     }
-    65% {
-        transform: scale(1,1);
-        opacity: 1;
-    }
-    70% {
-        transform: scale(1.1,1.1);
-        opacity: 1;
-    }
-    75% {
-        transform: scale(1,1);
-        opacity: 1;
-    }
-    80% {
-        transform: scale(1.1,1.1);
-        opacity: 1;
-    }
-    90% {
+    93% { // 7,44s
         fill: #1e1e1e; // #1e1e1e
     }
-    100% {
+    100% { // 8s
         transform: scale(1.1,1.1);
         opacity: 1;
         fill: #FFFFFF;
@@ -99,23 +83,23 @@ page-splash {
 }
 
 .letter {
-    animation: letter-animation 12s forwards linear;
+    animation: letter-animation 8s forwards linear;
 }
 
 @keyframes letter-animation {
     0% {
         fill: transparent;
     }
-    35% {
+    55% { // 4,4s
         fill: transparent;
     }
-    40% {
+    62% { // 4,96s
         fill: #FFFFFF;
     }
-    90% {
+    93% { // 7,44s
         fill: #FFFFFF;
     }
-    100% {
+    100% { // 8s
         fill: #1e1e1e;
     }
 }
@@ -123,7 +107,7 @@ page-splash {
 .classCircle {
     stroke-dasharray: 3023;
     stroke-dashoffset: -3023;
-    animation: circle-animation 10s forwards ease-in-out;
+    animation: circle-animation 6s forwards ease-in-out;
     -ms-transform: scale(6, 3); /* IE 9 */
     -webkit-transform: scale(6, 3); /* Safari */
     transform: scale(6, 3);
@@ -137,12 +121,12 @@ page-splash {
         -webkit-transform: scale(0, 0); /* Safari */
         transform: scale(0, 0);
     }
-    10% {
+    15% { // 0,9s
         -ms-transform: scale(0, 0); /* IE 9 */
         -webkit-transform: scale(0, 0); /* Safari */
         transform: scale(0, 0);
     }
-    50% {
+    83% { // 4,98s
         -ms-transform: scale(7, 3); /* IE 9 */
         -webkit-transform: scale(7, 3); /* Safari */
         transform: scale(7, 3);
@@ -150,7 +134,7 @@ page-splash {
 }
 
 #hexagon-1 {
-    animation: draw-hexagon-1 10s 0s forwards linear;
+    animation: draw-hexagon-1 6s forwards linear;
     transform-origin: 50% 50%;
 }
 
@@ -160,18 +144,15 @@ page-splash {
         stroke-dasharray: 3297;
         stroke-dashoffset: -3297;
     }
-    20% {
+    33% { // 1,98s
         stroke: #1e1e1e;
         stroke-dasharray: -3297;
         stroke-dashoffset: 0;
     }
-    59% {
+    99.9% { // 5,94s
         stroke: #1e1e1e;
     }
-    60% {
-       stroke: transparent;
-    }
-    100% {
+    100% { // 6s
        stroke: transparent;
     }
 }

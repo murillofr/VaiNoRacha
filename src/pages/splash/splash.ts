@@ -22,8 +22,7 @@ export class SplashPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController) {
-    this.menuCtrl.enable(false);
-  }
+    this.menuCtrl.enable(false);}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SplashPage');
@@ -44,6 +43,14 @@ export class SplashPage {
       }
     }, 10);
 
+  }
+
+  pularParaLogin() {
+    this.navCtrl.setRoot(this.pageLogin.component);
+  }
+
+  pularParaMapa() {
+    this.navCtrl.setRoot(this.pageMapa.component);
   }
 
 }

@@ -50,6 +50,10 @@
     width: 100%;
 }
 
+.svgLogin {
+    background-color: lightcoral;
+}
+
 .username-row {
     position: relative;
     height: 40px;
@@ -63,33 +67,14 @@
     border-bottom: 1px solid #fff;
 }
 
-.logar {
-    display: block;
-    width: 240px;
-    height: 40px;
-    padding: 0;
-    font-weight: 700;
-    color: #fff;
-    background-color: #22c08a;
-    border: none;
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-}
-
-.logar:hover {
-    background-color: #26d69a;
-}
-
-.logar:active {
-    background-color: #1eaa7a;
+.user-icon, .password-icon {
+    margin-right: 10px;
 }
 
 .user-icon .user-path,
 .password-icon .key-path{
     fill: rgba(10,10,10,0);
-    stroke: #fff;
+    stroke: #FFF;
     stroke-width: 3.5;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -104,7 +89,6 @@
     position: absolute;
     width: 180px;
     height: 30px;
-    margin: -10px 0px 0px 25%;
     background: transparent;
     border: none;
     color: #fff;
@@ -135,17 +119,20 @@
     width: 100%;
 }
 
-p {
+.pLogin {
     display: inline-block;
     width: 250px;
-    font-size: .8em;
+    font-size: .9em;
     color: rgba(255,255,255,.4);
     text-align: center;
     margin-left: -3%;
 }
 
-p a {
+.pLogin span {
+    margin-left: 10PX;
     color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 @-webkit-keyframes dash {
@@ -158,4 +145,27 @@ p a {
     to {
         stroke-dashoffset: 0;
     }
+}
+
+.logar {
+    display: block;
+    width: 240px;
+    height: 40px;
+    padding: 0;
+    font-weight: 700;
+    color: #fff;
+    background-color: #22c08a;
+    border: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+.logar:hover {
+    background-color: #26d69a;
+}
+
+.logar:active {
+    background-color: #1eaa7a;
 }
