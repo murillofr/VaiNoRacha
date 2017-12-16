@@ -40,37 +40,59 @@ export class LoginPage {
   }
 
   login() {
-      let loading = this.loadingCtrl.create({
-        content: 'Efetuando login...'
-      });
-      loading.present();
 
-      this.herokuProvider.postLogin(this.userData).subscribe(
-        (res) => {
-          loading.dismiss();
-          console.log('resposta', res);
-          this.navCtrl.setRoot(HomePage);
-        }, error => {
-          loading.dismiss();
-          console.log("Oooops!", error);
-          this.showAlert();
-        }
-      );
+    if (this.userData.user == "") {
+      this.showAlert("Usuario obrigatorio.");
+    } else {
+
+      if (this.userData.senha == "") {
+        this.showAlert("Senha obrigatoria.");
+      } else {
+
+        let loading = this.loadingCtrl.create({
+          content: 'Efetuando login...'
+        });
+        loading.present();
+
+        this.herokuProvider.postLogin(this.userData).subscribe(
+          (res) => {
+
+            this.salvarDadosLoginStorage();
+
+            loading.dismiss();
+            console.log('resposta', res);
+            this.navCtrl.setRoot(HomePage);
+          }, error => {
+            loading.dismiss();
+            console.log("Oooops!", error);
+            this.showAlert("Usuário ou senha incorretos.");
+          }
+        );
+
+      }
+    }
   }
 
-  showAlert() {
+  showAlert(msg) {
     let alert = this.alertCtrl.create({
-      title: 'Usuario ou senha incorretos.',
+      title: msg,
       // subTitle: 'Tente novamente.',
       enableBackdropDismiss: false,
       buttons: [{
         text: 'Ok',
         handler: () => {
-          console.log("Usuario ou senha incorretos.");
+          console.log(msg);
         }
       }]
     });
     alert.present();
+  }
+
+  salvarDadosLoginStorage() {
+    window.localStorage.setItem('usuario', this.userData.user);
+    window.localStorage.setItem('senha', this.userData.senha);
+    console.log("Usuario: " + window.localStorage.getItem('usuario'));
+    console.log("Senha: " + window.localStorage.getItem('senha'));
   }
 
   tapEvent() {

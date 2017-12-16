@@ -14,15 +14,14 @@ export class SplashPage {
   pageMapa = { title: 'Mapa', component: HomePage };
   pageLogin = { title: 'Login', component: LoginPage };
 
-  // Aqui irá pegar a variável LocalStorage
-  pageAtiva = 'LOGIN';
-  //pageAtiva = 'MAPA';
+  pageAtiva = '';
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public menuCtrl: MenuController) {
-    this.menuCtrl.enable(false);}
+    this.menuCtrl.enable(false);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SplashPage');
@@ -33,6 +32,8 @@ export class SplashPage {
     var teste = setInterval(() => {
       if (window.getComputedStyle(body).backgroundColor == 'rgb(30, 30, 30)') {
         clearInterval(teste);
+
+        this.setarPageInicial();
 
         if (this.pageAtiva == 'MAPA') {
           this.navCtrl.setRoot(this.pageMapa.component);
@@ -51,6 +52,15 @@ export class SplashPage {
 
   pularParaMapa() {
     this.navCtrl.setRoot(this.pageMapa.component);
+  }
+
+  setarPageInicial() {
+    if (window.localStorage.getItem('usuario') !== null &&
+      window.localStorage.getItem('senha') !== null) {
+      this.pageAtiva = 'MAPA';
+    } else {
+      this.pageAtiva = 'LOGIN';
+    }
   }
 
 }
