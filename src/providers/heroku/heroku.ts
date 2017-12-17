@@ -30,7 +30,7 @@ export class HerokuProvider {
 
   // Usado em: Rachas Marcados
   encontrarRachasMarcados() {
-    var url = `${this.basepath}/usuarios/rachas/3`;
+    var url = `${this.basepath}/usuarios/rachas/${window.localStorage.getItem('idUsuario')}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
@@ -85,13 +85,16 @@ export class HerokuProvider {
     console.log(myData);
     return this.httpClient.post(this.basepath + '/rachas', myData, { headers: headers });
   }
+
   // Usado em: Login
   postLogin(data) {
     var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
-    return this.httpClient.post(this.basepath + '/login', data, { headers: headers , 
-      observe: 'response', responseType: 'text'});
+    return this.httpClient.post(this.basepath + '/login', data, {
+      headers: headers,
+      observe: 'response', responseType: 'json'
+    });
   }
-
+  
 
   //--------------- DELETE ---------------
   // Usado em: Rachas Marcados

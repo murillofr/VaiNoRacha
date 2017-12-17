@@ -10,6 +10,7 @@ import {
 import { HerokuProvider } from './../../providers/heroku/heroku';
 import { RachasPage } from './../rachas/rachas';
 import { QuadraInfosPage } from './../quadra-infos/quadra-infos';
+import { DomSanitizer } from '@angular/platform-browser';
 
 var dataSelecionada = null;
 var horarioSelecionado = null;
@@ -25,6 +26,8 @@ export class MarcarRachaPage {
 
   // @ViewChild('searchBar') myInput;
 
+  safeSvg: any;
+
   private todosHorarios: Array<any>;
   private quadrasPesquisadas: Array<any>;
   private horariosPesquisados: Array<any>;
@@ -35,7 +38,8 @@ export class MarcarRachaPage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    private herokuProvider: HerokuProvider) {
+    private herokuProvider: HerokuProvider,
+    private sanitizer: DomSanitizer) {
 
   }
 
@@ -62,10 +66,32 @@ export class MarcarRachaPage {
   }
 
   encontrarTodosHorarios() {
-    let loading = this.loadingCtrl.create({
-      content: 'Detectando horários...'
-    });
-    loading.present();
+    let svg = `
+      <div class="divContainerLoading">
+        <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+          <style>
+            .st1 {
+              fill: transparent;
+              stroke-width: 40;
+              stroke-miterlimit: 10;
+            }
+          </style>
+
+          <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+          />
+
+        </svg>
+        <span class="spanMsgLoading">Detectando horários...</span>
+      </div>
+    `;
+
+  this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+
+  let loading = this.loadingCtrl.create({
+    spinner: 'hide',
+    content: this.safeSvg,
+  });
+  loading.present();
 
     this.herokuProvider.encontrarTodosHorarios().subscribe(
       data => {
@@ -84,10 +110,32 @@ export class MarcarRachaPage {
   }
 
   pesquisarQuadraPorNome(termoBuscado) {
-    let loading = this.loadingCtrl.create({
-      content: 'Localizando...'
-    });
-    loading.present();
+    let svg = `
+      <div class="divContainerLoading">
+        <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+          <style>
+            .st1 {
+              fill: transparent;
+              stroke-width: 40;
+              stroke-miterlimit: 10;
+            }
+          </style>
+
+          <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+          />
+
+        </svg>
+        <span class="spanMsgLoading">Localizando...</span>
+      </div>
+    `;
+
+  this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+
+  let loading = this.loadingCtrl.create({
+    spinner: 'hide',
+    content: this.safeSvg,
+  });
+  loading.present();
 
     this.herokuProvider.pesquisarQuadraPorNome(termoBuscado).subscribe(
       data => {
@@ -125,10 +173,32 @@ export class MarcarRachaPage {
   }
 
   pesquisarPorHorario(id, data) {
-    let loading = this.loadingCtrl.create({
-      content: 'Localizando quadras...'
-    });
-    loading.present();
+    let svg = `
+      <div class="divContainerLoading">
+        <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+          <style>
+            .st1 {
+              fill: transparent;
+              stroke-width: 40;
+              stroke-miterlimit: 10;
+            }
+          </style>
+
+          <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+          />
+
+        </svg>
+        <span class="spanMsgLoading">Localizando quadras...</span>
+      </div>
+    `;
+
+  this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+
+  let loading = this.loadingCtrl.create({
+    spinner: 'hide',
+    content: this.safeSvg,
+  });
+  loading.present();
 
     this.herokuProvider.pesquisarPorHorario(id, data).subscribe(
       data => {

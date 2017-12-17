@@ -79,11 +79,20 @@ export class MyApp {
   }
 
   deletarLocalStorage() {
-    window.localStorage.removeItem('usuario');
+    window.localStorage.removeItem('idUsuario');
+    window.localStorage.removeItem('nome');
+    window.localStorage.removeItem('cpf_cnpj');
+    window.localStorage.removeItem('userName');
     window.localStorage.removeItem('senha');
+    window.localStorage.removeItem('perfil');
+
     console.log("Deletado do localStorage os dados de login");
-    console.log("Usuario: " + window.localStorage.getItem('usuario'));
-    console.log("Senha: " + window.localStorage.getItem('senha'));
+    console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
+    console.log("nome: " + window.localStorage.getItem('nome'));
+    console.log("cpf_cnpj: " + window.localStorage.getItem('cpf_cnpj'));
+    console.log("userName: " + window.localStorage.getItem('userName'));
+    console.log("senha: " + window.localStorage.getItem('senha'));
+    console.log("perfil: " + window.localStorage.getItem('perfil'));
   }
 
 }

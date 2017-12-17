@@ -12,7 +12,7 @@
     max-height: 130px;
 }
 
-#svgLogin_background,.svgLogin_letterr {
+#svgLogin_background,.svgLogin_letter {
     transform-origin: 50% 50%;
     opacity: 1;
 }
@@ -32,10 +32,12 @@
     left: 50%;
     position: absolute;
     transform: translate(-50%, 0%);
-    animation: login-animation 1s ease-in-out;
+    animation: login-animation-in 1s ease-in-out;
     opacity: 1;
+    height: 0px;
+    visibility: visible;
 }
-@keyframes login-animation {
+@keyframes login-animation-in {
     0% {
         opacity: 0;
     }
@@ -44,14 +46,24 @@
     }
 }
 
+@keyframes login-animation-out {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 .login-form {
     padding: 8px 20px 20px;
-    height: 120px;
     width: 100%;
 }
 
 .svgLogin {
-    background-color: lightcoral;
+    // background-color: lightcoral;
 }
 
 .username-row {
@@ -168,4 +180,90 @@
 
 .logar:active {
     background-color: #1eaa7a;
+}
+
+.sumirDadosUsuarioLogado {
+    opacity: 0;
+}
+
+.aparecerDadosUsuarioLogado {
+    animation: dadosUser-animation 1s ease-in-out;
+    opacity: 1;
+    padding: 8px 20px 20px;
+    width: 100%;
+    top: 0;
+    position: absolute;
+    text-align: left;
+}
+@keyframes dadosUser-animation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.divImg-Nome {
+    display: flex;
+	justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    border: 1px solid #FFFFFF;
+    padding: 10px 0;
+}
+
+#spanNomeUsuario {
+    color: #fff;
+    font-size: 1.3em;
+    max-width: 160px;
+}
+
+#divContainerLoading {
+    display: flex;
+	justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+@keyframes divContainerLoading-animation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#spanMsgLoading {
+    color: #fff;
+    font-size: 1em;
+}
+
+#svgLoading {
+    height: 34px;
+    width: 34px;
+    margin-right: 20px;
+}
+
+#hexagonLoading {
+    animation: draw-hexagonLoadingLogin 1s infinite forwards linear;
+    transform-origin: 50% 50%;
+}
+
+@keyframes draw-hexagonLoadingLogin {
+    0% {
+        stroke: #FFFFFF;
+        stroke-dasharray: 3297;
+        stroke-dashoffset: -3297;
+    }
+    50% {
+        stroke: #FFFFFF;
+        stroke-dasharray: -3297;
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke: #FFFFFF;
+        stroke-dasharray: 3297;
+        stroke-dashoffset: 3297;
+    }
 }

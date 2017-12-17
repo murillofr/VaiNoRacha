@@ -8,6 +8,7 @@ import {
   AlertController
 } from 'ionic-angular';
 import { HerokuProvider } from './../../providers/heroku/heroku';
+import { DomSanitizer } from '@angular/platform-browser';
 
 var dataSelecionada = null;
 var diaSemanaSelecionado: String;
@@ -22,6 +23,8 @@ export class QuadraInfosPage {
 
   dataPost: any = {};
 
+  safeSvg: any;
+
   private quadraInfos: any = {};
   private idParam = this.navParams.data.id;
   private diasFuncionamentoArray = [];
@@ -35,7 +38,8 @@ export class QuadraInfosPage {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public alertCtrl: AlertController,
-    private herokuProvider: HerokuProvider) {
+    private herokuProvider: HerokuProvider,
+    private sanitizer: DomSanitizer) {
 
   }
 
@@ -46,8 +50,30 @@ export class QuadraInfosPage {
   }
 
   encontrarQuadra() {
+    let svg = `
+      <div class="divContainerLoading">
+        <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+          <style>
+            .st1 {
+              fill: transparent;
+              stroke-width: 40;
+              stroke-miterlimit: 10;
+            }
+          </style>
+
+          <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+          />
+
+        </svg>
+        <span class="spanMsgLoading">Localizando informações da quadra...</span>
+      </div>
+    `;
+
+    this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+
     let loading = this.loadingCtrl.create({
-      content: 'Localizando informações da quadra...'
+      spinner: 'hide',
+      content: this.safeSvg,
     });
     loading.present();
 
@@ -163,8 +189,30 @@ export class QuadraInfosPage {
   }
 
   pesquisarHorariosDisponiveis(id, data) {
+    let svg = `
+      <div class="divContainerLoading">
+        <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+          <style>
+            .st1 {
+              fill: transparent;
+              stroke-width: 40;
+              stroke-miterlimit: 10;
+            }
+          </style>
+
+          <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+          />
+
+        </svg>
+        <span class="spanMsgLoading">Localizando quadras...</span>
+      </div>
+    `;
+
+    this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+
     let loading = this.loadingCtrl.create({
-      content: 'Localizando quadras...'
+      spinner: 'hide',
+      content: this.safeSvg,
     });
     loading.present();
 
@@ -210,13 +258,35 @@ export class QuadraInfosPage {
 
   submit(horario) {
 
-    this.dataPost.idUsuario = 3
+    this.dataPost.idUsuario = window.localStorage.getItem('idUsuario');
     this.dataPost.idQuadra = this.idParam;
     this.dataPost.idHorario = horario.id;
     this.dataPost.dataRacha = dataSelecionada;
 
+    let svg = `
+      <div class="divContainerLoading">
+        <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+          <style>
+            .st1 {
+              fill: transparent;
+              stroke-width: 40;
+              stroke-miterlimit: 10;
+            }
+          </style>
+
+          <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+          />
+
+        </svg>
+        <span class="spanMsgLoading">Reservando racha...</span>
+      </div>
+    `;
+
+    this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+
     let loading = this.loadingCtrl.create({
-      content: 'Reservando racha...'
+      spinner: 'hide',
+      content: this.safeSvg,
     });
     loading.present();
 
