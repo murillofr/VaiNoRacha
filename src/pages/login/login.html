@@ -32,7 +32,7 @@
               C-191.3,356.5-196.9,350.3-203.7,350.3L-203.7,350.3z" />
           </svg>
         </label>
-        <ion-input clearInput class="input" value="" [(ngModel)]="userData.user" placeholder="Usuario"></ion-input>
+        <ion-input clearInput class="inputLogin" value="" [(ngModel)]="userData.user" placeholder="Usuario"></ion-input>
       </div>
       <div class="password-row row">
         <label>
@@ -42,7 +42,7 @@
             />
           </svg>
         </label>
-        <ion-input clearInput type="password" value="" [(ngModel)]="userData.senha" placeholder="Senha"></ion-input>
+        <ion-input clearInput class="inputLogin" type="password" value="" [(ngModel)]="userData.senha" placeholder="Senha"></ion-input>
       </div>
       <div class="call-to-action">
         <button class="logar" (click)="login()">ENTRAR</button>

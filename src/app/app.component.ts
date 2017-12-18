@@ -95,4 +95,8 @@ export class MyApp {
     console.log("perfil: " + window.localStorage.getItem('perfil'));
   }
 
+  alterarImagemAvatar() {
+    this.tapEvent();
+  }
+
 }

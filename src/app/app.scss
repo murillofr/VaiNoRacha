@@ -41,7 +41,6 @@ i[class^="fa-"], ion-icon[class^="fa-"] {
     -ms-transform: rotate(120deg);
     -o-transform: rotate(120deg);
     transform: rotate(120deg);
-    background-color: red;
 }
 .imagem1{
     overflow: hidden;
@@ -71,6 +70,7 @@ i[class^="fa-"], ion-icon[class^="fa-"] {
     width: 60px;
     height: 90px;
     margin: -10px 20px -10px 0px;
+    cursor: pointer;
 }
 .tresMenu .imagem2 {
     background-size: cover;

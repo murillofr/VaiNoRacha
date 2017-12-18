@@ -21,7 +21,7 @@ export class HerokuProvider {
   }
 
   //--------------- GET ---------------
-  // Usado em: Home
+  // Usado em: Home, Splash, Login
   encontrarQuadras() {
     var url = `${this.basepath}/quadras`;
     var response = this.http.get(url).map(res => res.json());
@@ -94,7 +94,18 @@ export class HerokuProvider {
       observe: 'response', responseType: 'json'
     });
   }
-  
+
+
+  //--------------- PUT ---------------
+  // Usado em: Configurações
+  putSenha(id, data) {
+    var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
+    return this.httpClient.put(`${this.basepath}/usuarios/${id}`, data, {
+      headers: headers,
+      observe: 'response', responseType: 'json'
+    });
+  }
+
 
   //--------------- DELETE ---------------
   // Usado em: Rachas Marcados

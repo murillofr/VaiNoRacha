@@ -24,101 +24,105 @@
 
 <ion-content class="body">
 
-  <ion-toolbar no-border-top>
-    <ion-segment [(ngModel)]="trophy" color="secondary">
-      <ion-segment-button value="bronze">
-        <ion-icon class="fa-trophy" style="color:#cd7f32"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="prata">
-        <ion-icon class="fa-trophy" style="color:silver"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="ouro">
-        <ion-icon class="fa-trophy" style="color:goldenrod"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
+  <ion-card>
 
-  <div [ngSwitch]="trophy">
-    <ion-list *ngSwitchCase="'bronze'" class="listBronze">
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="cart" item-start large></ion-icon>
-        Shopping
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="medical" item-start large></ion-icon>
-        Hospital
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="cafe" item-start large></ion-icon>
-        Cafe
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="paw" item-start large></ion-icon>
-        Dog Park
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="beer" item-start large></ion-icon>
-        Pub
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="jet" item-start large></ion-icon>
-        Jet
-      </button>
-    </ion-list>
+    <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="trophy" color="verdeEscuro">
+        <ion-segment-button value="bronze">
+          <ion-icon class="fa-trophy" style="color:#cd7f32"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="prata">
+          <ion-icon class="fa-trophy" style="color:silver"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="ouro">
+          <ion-icon class="fa-trophy" style="color:goldenrod"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
 
-    <ion-list *ngSwitchCase="'prata'" class="listPrata">
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="alarm" item-start large></ion-icon>
-        Alarm
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="archive" item-start large></ion-icon>
-        Archive
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="construct" item-start large></ion-icon>
-        Construct
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="star" item-start large></ion-icon>
-        Star
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="megaphone" item-start large></ion-icon>
-        Megaphone
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="planet" item-start large></ion-icon>
-        Planet
-      </button>
-    </ion-list>
+    <div [ngSwitch]="trophy">
+      <ion-list *ngSwitchCase="'bronze'" class="listBronze">
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="cart" item-start large></ion-icon>
+          Shopping
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="medical" item-start large></ion-icon>
+          Hospital
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="cafe" item-start large></ion-icon>
+          Cafe
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="paw" item-start large></ion-icon>
+          Dog Park
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="beer" item-start large></ion-icon>
+          Pub
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="jet" item-start large></ion-icon>
+          Jet
+        </button>
+      </ion-list>
 
-    <ion-list *ngSwitchCase="'ouro'" class="listOuro">
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="magnet" item-start large></ion-icon>
-        magnet
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="pizza" item-start large></ion-icon>
-        Pizza
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="partly-sunny" item-start large></ion-icon>
-        Partly Sunny
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="outlet" item-start large></ion-icon>
-        Outlet
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="nuclear" item-start large></ion-icon>
-        Nuclear
-      </button>
-      <button ion-item (click)="presentAlert()">
-        <ion-icon name="no-smoking" item-start large></ion-icon>
-        Space
-      </button>
-    </ion-list>
-  </div>
+      <ion-list *ngSwitchCase="'prata'" class="listPrata">
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="alarm" item-start large></ion-icon>
+          Alarm
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="archive" item-start large></ion-icon>
+          Archive
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="construct" item-start large></ion-icon>
+          Construct
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="star" item-start large></ion-icon>
+          Star
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="megaphone" item-start large></ion-icon>
+          Megaphone
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="planet" item-start large></ion-icon>
+          Planet
+        </button>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'ouro'" class="listOuro">
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="magnet" item-start large></ion-icon>
+          magnet
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="pizza" item-start large></ion-icon>
+          Pizza
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="partly-sunny" item-start large></ion-icon>
+          Partly Sunny
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="outlet" item-start large></ion-icon>
+          Outlet
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="nuclear" item-start large></ion-icon>
+          Nuclear
+        </button>
+        <button ion-item (click)="presentAlert()">
+          <ion-icon name="no-smoking" item-start large></ion-icon>
+          Space
+        </button>
+      </ion-list>
+    </div>
+
+  </ion-card>
 
 </ion-content>
