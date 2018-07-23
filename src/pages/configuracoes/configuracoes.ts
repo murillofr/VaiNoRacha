@@ -19,7 +19,7 @@ export class ConfiguracoesPage {
 
   data: any = {};
   senha = { "senhaAtual": "", "novaSenha1": "", "novaSenha2": "" };
-  senhaEnviar = { "senha": "" };
+  putUsuario = { "password": "" };
   safeSvg: any;
 
   constructor(
@@ -43,7 +43,7 @@ export class ConfiguracoesPage {
     } else if (this.senha.novaSenha1 == "") {
       this.showAlert("Nova senha obrigatoria.");
     } else if (this.senha.novaSenha1 !== this.senha.novaSenha2) {
-      this.showAlert("Senha nova repetida incorretamente.");
+      this.showAlert("Nova senha repetida incorretamente.");
     } else if (this.senha.senhaAtual !== window.localStorage.getItem('senha')) {
       this.showAlert("Senha atual incorreta.");
     } else {
@@ -75,8 +75,8 @@ export class ConfiguracoesPage {
       });
       loading.present();
 
-      this.senhaEnviar.senha = this.senha.novaSenha1;
-      this.herokuProvider.putSenha(window.localStorage.getItem('idUsuario'), this.senhaEnviar).subscribe(
+      this.putUsuario.password = this.senha.novaSenha1;
+      this.herokuProvider.putUsuario(window.localStorage.getItem('idUsuario'), this.putUsuario).subscribe(
         (res) => {
           this.data = res.body;
           console.log('resposta', res);
@@ -90,6 +90,9 @@ export class ConfiguracoesPage {
             console.log('Senha alterada com sucesso.');
             this.showAlert("Senha alterada com sucesso.");
             window.localStorage.setItem('senha', this.senha.novaSenha1);
+            this.senha.senhaAtual = "";
+            this.senha.novaSenha1 = "";
+            this.senha.novaSenha2 = "";
           });
         }
       );

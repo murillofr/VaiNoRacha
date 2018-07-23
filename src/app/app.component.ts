@@ -59,13 +59,9 @@ export class MyApp {
   }
 
   openPage(page) {
-
     if (page.title == 'Login') {
       this.deletarLocalStorage();
     }
-
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
 
@@ -85,6 +81,7 @@ export class MyApp {
     window.localStorage.removeItem('userName');
     window.localStorage.removeItem('senha');
     window.localStorage.removeItem('perfil');
+    window.localStorage.removeItem('rentalHistory');
 
     console.log("Deletado do localStorage os dados de login");
     console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
@@ -93,6 +90,7 @@ export class MyApp {
     console.log("userName: " + window.localStorage.getItem('userName'));
     console.log("senha: " + window.localStorage.getItem('senha'));
     console.log("perfil: " + window.localStorage.getItem('perfil'));
+    console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
   }
 
   alterarImagemAvatar() {

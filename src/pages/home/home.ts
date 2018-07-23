@@ -1,17 +1,3 @@
-// import { Component } from '@angular/core';
-// import { NavController } from 'ionic-angular';
-
-// @Component({
-//   selector: 'page-home',
-//   templateUrl: 'home.html'
-// })
-// export class HomePage {
-
-//   constructor(public navCtrl: NavController) {
-
-//   }
-
-// }
 // import {
 //   GoogleMaps,
 //   GoogleMap,
@@ -28,7 +14,6 @@ import { HerokuProvider } from './../../providers/heroku/heroku';
 import { QuadraInfosPage } from './../quadra-infos/quadra-infos';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { DomSanitizer } from '@angular/platform-browser';
-// import { HomeService } from './../../service/rest/home-service';
 
 declare var google;
 
@@ -55,24 +40,20 @@ export class HomePage {
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
     public geolocation: Geolocation,
-    // public homeService: HomeService,
     private herokuProvider: HerokuProvider,
     public menuCtrl: MenuController,
     private sanitizer: DomSanitizer) {
-    this.menuCtrl.enable(true);
+      this.menuCtrl.enable(true);
   }
 
   ionViewDidLoad() {
-
-    console.log("Quadras", this.quadrasParam);
     if (this.quadrasParam !== undefined) {
       document.getElementById("h3MenuNomeUsuario").innerHTML = window.localStorage.getItem('nome');
       this.quadras = this.quadrasParam;
       this.loadMap();
     } else {
-      this.encontrarQuadras();
+      this.pesquisarTodasAsQuadras();
     }
-
   }
 
   loadMap() {
@@ -96,7 +77,7 @@ export class HomePage {
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.addMarker();
+      this.addMarker(); 
 
       // Estilizando o mapa;
       // Criando um array com os estilos
@@ -131,7 +112,7 @@ export class HomePage {
       // Aplicando as configurações do mapa
       this.map.mapTypes.set('map_style', styledMap);
       this.map.setMapTypeId('map_style');
-
+      
       // Chamada para a função que vai percorrer a informação
       // contida no array quadras e criar os marcadores a mostrar no mapa
       this.displayMarkers();
@@ -192,7 +173,7 @@ export class HomePage {
 
   }
 
-  encontrarQuadras() {
+  pesquisarTodasAsQuadras() {
     let svg = `
       <div class="divContainerLoading">
         <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
@@ -220,7 +201,7 @@ export class HomePage {
     });
     loading.present();
 
-    this.herokuProvider.encontrarQuadras().subscribe(
+    this.herokuProvider.pesquisarTodasAsQuadras().subscribe(
       data => {
         this.quadras = data;
         console.log(data);
@@ -243,19 +224,19 @@ export class HomePage {
     // esta variável vai definir a área de mapa a abranger e o nível do zoom
     // de acordo com as posições dos marcadores
     var bounds = new google.maps.LatLngBounds();
-
-    // Loop que vai percorrer a informação contida no array quadras 
-    // para que a função createMarker possa criar os marcadores 
+    console.log(this.quadras);
+    // Loop que vai percorrer a informação contida no array quadras
+    // para que a função createMarker possa criar os marcadores
     for (let i in this.quadras) {
-      var coordenadasSplit = this.quadras[i].coordenada.split(',');
+      var coordenadasSplit = this.quadras[i].coordinate.split('/');
       var id = this.quadras[i].id;
       var latlng = new google.maps.LatLng(coordenadasSplit[0], coordenadasSplit[1]);
-      var nome = this.quadras[i].nome;
-      var logadouro = this.quadras[i].logadouro;
-      var numero = this.quadras[i].numero;
-      var bairro = this.quadras[i].bairro;
-      var telefone = this.quadras[i].telefone;
-      var diasFuncionamento = this.quadras[i].diasFuncionamento;
+      var nome = this.quadras[i].name;
+      var logadouro = this.quadras[i].street;
+      var numero = this.quadras[i].number;
+      var bairro = this.quadras[i].neighborhood;
+      var telefone = this.quadras[i].telephone;
+      var diasFuncionamento = this.quadras[i].daysOfOperations;
 
       this.createMarker(id, latlng, nome, logadouro, numero, bairro, telefone, diasFuncionamento);
 
@@ -344,6 +325,7 @@ export class HomePage {
   }
 
   marcarRacha(id) {
+    console.log('ID HOME: ',id);
     this.navCtrl.push(QuadraInfosPage, {
       id: id
     });

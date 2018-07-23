@@ -41,10 +41,10 @@
           <ion-list>
             <button ion-item *ngFor="let quadraPesquisada of quadrasPesquisadas" (click)="pushPageQuadraInfos(quadraPesquisada.id)">
               <img class="imgHorarios" src="./../../assets/icon/racha-B.svg" item-start>
-              <h2>{{quadraPesquisada.nome}}</h2>
-              <p>{{quadraPesquisada.logadouro}}, {{quadraPesquisada.numero}}</p>
-              <p>{{quadraPesquisada.bairro}}</p>
-              <p>{{quadraPesquisada.telefone}}</p>
+              <h2>{{quadraPesquisada.name}}</h2>
+              <p>{{quadraPesquisada.street}}, {{quadraPesquisada.number}}</p>
+              <p>{{quadraPesquisada.neighborhood}}</p>
+              <p>{{quadraPesquisada.telephone}}</p>
             </button>
           </ion-list>
         </div>
@@ -62,7 +62,7 @@
           <ion-label>HORÁRIO</ion-label>
           <ion-select class="selectHorario" placeholder="Selecione o horário" [(ngModel)]="horario" (ionChange)="onHorarioSelecionado(horario)"
             okText="Ok" cancelText="Cancelar">
-            <ion-option *ngFor="let horario of todosHorarios" [value]="horario">{{ horario.horarioInicio }} - {{ horario.horarioFim }}</ion-option>
+            <ion-option *ngFor="let horario of todosHorarios" [value]="horario">{{ horario.startTime }} - {{ horario.endTime }}</ion-option>
           </ion-select>
         </ion-item>
 
@@ -74,10 +74,10 @@
           <ion-list>
             <button ion-item *ngFor="let horarioPesquisado of horariosPesquisados" (click)="pushPageRachas(horarioPesquisado)">
               <img class="imgHorarios" src="./../../assets/icon/racha-B.svg" item-start>
-              <h2>{{horarioPesquisado.nome}}</h2>
-              <p>{{horarioPesquisado.logadouro}}, {{horarioPesquisado.numero}}</p>
-              <p>{{horarioPesquisado.bairro}}</p>
-              <p>{{horarioPesquisado.telefone}}</p>
+              <h2>{{horarioPesquisado.name}}</h2>
+              <p>{{horarioPesquisado.street}}, {{horarioPesquisado.number}}</p>
+              <p>{{horarioPesquisado.neighborhood}}</p>
+              <p>{{horarioPesquisado.telephone}}</p>
             </button>
           </ion-list>
         </div>

@@ -47,7 +47,7 @@ export class MarcarRachaPage {
     console.log('ionViewDidLoad MarcarRachaPage');
     dataSelecionada = null;
     horarioSelecionado = null;
-    this.encontrarTodosHorarios();
+    this.pesquisarTodosOsHorarios();
   }
 
   ionViewWillEnter() {
@@ -65,7 +65,7 @@ export class MarcarRachaPage {
     this.marcouRacha = false;
   }
 
-  encontrarTodosHorarios() {
+  pesquisarTodosOsHorarios() {
     let svg = `
       <div class="divContainerLoading">
         <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
@@ -93,7 +93,7 @@ export class MarcarRachaPage {
   });
   loading.present();
 
-    this.herokuProvider.encontrarTodosHorarios().subscribe(
+    this.herokuProvider.pesquisarTodosOsHorarios().subscribe(
       data => {
         this.todosHorarios = data;
         console.log(data);
@@ -172,7 +172,7 @@ export class MarcarRachaPage {
     this.limparQuadrasPesquisadas();
   }
 
-  pesquisarPorHorario(id, data) {
+  pesquisarQuadrasDisponiveisPorIdeNome(id, data) {
     let svg = `
       <div class="divContainerLoading">
         <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
@@ -200,7 +200,7 @@ export class MarcarRachaPage {
   });
   loading.present();
 
-    this.herokuProvider.pesquisarPorHorario(id, data).subscribe(
+    this.herokuProvider.pesquisarQuadrasDisponiveisPorIdeNome(id, data).subscribe(
       data => {
         this.horariosPesquisados = data;
         console.log(data);
@@ -238,7 +238,7 @@ export class MarcarRachaPage {
 
   pesquisarRachaHorario() {
     if ((dataSelecionada !== null) && (horarioSelecionado !== null)) {
-      this.pesquisarPorHorario(horarioSelecionado.id, dataSelecionada);
+      this.pesquisarQuadrasDisponiveisPorIdeNome(horarioSelecionado.id, dataSelecionada);
       console.log(dataSelecionada);
       console.log(horarioSelecionado.id);
     } else {

@@ -18,7 +18,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class RachasPage {
 
-  data: any = {};
+  dataPost: any = {};
 
   private quadra = this.navParams.data.quadra;
   private dataRacha = this.navParams.data.dataRacha;
@@ -79,10 +79,10 @@ export class RachasPage {
 
   submit() {
 
-    this.data.idUsuario = window.localStorage.getItem('idUsuario');
-    this.data.idQuadra = this.quadra.id;
-    this.data.idHorario = this.horarioRacha.id;
-    this.data.dataRacha = this.dataRacha;
+    this.dataPost.userId = window.localStorage.getItem('idUsuario');
+    this.dataPost.blockId = this.quadra.id;
+    this.dataPost.timeId = this.horarioRacha.id;
+    this.dataPost.streakDate = this.dataRacha;
 
     let svg = `
       <div class="divContainerLoading">
@@ -111,17 +111,19 @@ export class RachasPage {
     });
     loading.present();
 
-    console.log(this.data);
-    this.herokuProvider.postRacha(this.data).subscribe(data => {
-      console.log('resposta', data);
-    }, error => {
-      if (error['status'] == 201) {
+    console.log(this.dataPost);
+
+    this.herokuProvider.postRacha(this.dataPost).subscribe(
+      (res) => {
+        console.log('resposta', res);
+      }, error => {
+        console.log("Oooops!", error);
+      },
+      () => {
         loading.dismiss();
         this.showAlert();
       }
-      else
-        console.log("Oooops!", error);
-    });
+    );
   }
 
   showAlert() {

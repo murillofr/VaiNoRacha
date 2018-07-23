@@ -24,7 +24,7 @@ export class LoginPage {
   private quadras: Array<any>;
 
   responseData: any;
-  userData = { "user": "", "senha": "" };
+  userData = { "user": "", "password": "" };
 
   safeSvg: any;
 
@@ -37,10 +37,17 @@ export class LoginPage {
     private herokuProvider: HerokuProvider,
     public menuCtrl: MenuController,
     private sanitizer: DomSanitizer) {
-    this.menuCtrl.enable(false);
+      this.menuCtrl.enable(false);
   }
 
   ionViewDidLoad() {
+    console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
+    console.log("nome: " + window.localStorage.getItem('nome'));
+    console.log("cpf_cnpj: " + window.localStorage.getItem('cpf_cnpj'));
+    console.log("userName: " + window.localStorage.getItem('userName'));
+    console.log("senha: " + window.localStorage.getItem('senha'));
+    console.log("perfil: " + window.localStorage.getItem('perfil'));
+    console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
     console.log('ionViewDidLoad LoginPage');
   }
 
@@ -48,61 +55,59 @@ export class LoginPage {
 
     if (this.userData.user == "") {
       this.showAlert("Usuario obrigatorio.");
+    } else if (this.userData.password == "") {
+      this.showAlert("Senha obrigatoria.");
     } else {
 
-      if (this.userData.senha == "") {
-        this.showAlert("Senha obrigatoria.");
-      } else {
+      let svg = `
+        <div class="divContainerLoading">
+          <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
+            <style>
+              .st1 {
+                fill: transparent;
+                stroke-width: 40;
+                stroke-miterlimit: 10;
+              }
+            </style>
 
-        let svg = `
-          <div class="divContainerLoading">
-            <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
-              <style>
-                .st1 {
-                  fill: transparent;
-                  stroke-width: 40;
-                  stroke-miterlimit: 10;
-                }
-              </style>
+            <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
+            />
 
-              <path id="idHexagonLoading" stroke="transparent" class="st1" d="M570.1 82.5L163.7 317.2c-15.6 9-25.2 25.6-25.2 43.6v469.3c0 18 9.6 34.6 25.2 43.6l406.4 234.7c15.6 9 34.7 9 50.3 0l406.4-234.7c15.6-9 25.2-25.6 25.2-43.6V360.8c0-18-9.6-34.6-25.2-43.6L620.4 82.5c-15.5-8.9-34.7-8.9-50.3 0z"
-              />
+          </svg>
+          <span class="spanMsgLoading">Efetuando login...</span>
+        </div>
+      `;
 
-            </svg>
-            <span class="spanMsgLoading">Efetuando login...</span>
-          </div>
-        `;
+      this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
 
-        this.safeSvg = this.sanitizer.bypassSecurityTrustHtml(svg);
+      let loading = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: this.safeSvg,
+      });
+      loading.present();
 
-        let loading = this.loadingCtrl.create({
-          spinner: 'hide',
-          content: this.safeSvg,
-        });
-        loading.present();
+      this.herokuProvider.postLogin(this.userData).subscribe(
+        (res) => {
+          this.data = res.body;
+          console.log('resposta', res);
+          this.salvarDadosLoginStorage();
+        }, error => {
+          loading.dismiss();
+          console.log("Oooops!", error);
+          this.showAlert("Usuário ou senha incorretos.");
+        },
+        () => {
+          console.log('Login efetuado com sucesso.');
+          this.aparecerDadosUsuario();
+          loading.dismiss().then(() => {
+            this.pesquisarTodasAsQuadras();
+          });
+        }
+      );
 
-        this.herokuProvider.postLogin(this.userData).subscribe(
-          (res) => {
-            this.data = res.body;
-            this.salvarDadosLoginStorage();
-            console.log('resposta', res);
-          }, error => {
-            loading.dismiss();
-            console.log("Oooops!", error);
-            this.showAlert("Usuário ou senha incorretos.");
-          },
-          () => {
-            console.log('Login efetuado com sucesso.');
-            this.aparecerDadosUsuario();
-            loading.dismiss().then(() => {
-              this.encontrarQuadras();
-            });
-          }
-        );
-
-      }
     }
   }
+  
 
   showAlert(msg) {
     let alert = this.alertCtrl.create({
@@ -120,13 +125,15 @@ export class LoginPage {
   }
 
   salvarDadosLoginStorage() {
+    console.log('this.data', this.data);
 
-    window.localStorage.setItem('idUsuario', this.data.Id_Usuario);
-    window.localStorage.setItem('nome', this.data.Nome);
-    window.localStorage.setItem('cpf_cnpj', this.data.cpf_cnpj);
-    window.localStorage.setItem('userName', this.data.UserName);
-    window.localStorage.setItem('senha', this.userData.senha);
-    window.localStorage.setItem('perfil', this.data.Perfil);
+    window.localStorage.setItem('idUsuario', this.data.id);
+    window.localStorage.setItem('nome', this.data.name);
+    window.localStorage.setItem('cpf_cnpj', this.data.cpfOrCnpj);
+    window.localStorage.setItem('userName', this.data.userName);
+    window.localStorage.setItem('senha', this.userData.password);
+    window.localStorage.setItem('perfil', this.data.perfis);
+    window.localStorage.setItem('rentalHistory', this.data.rentalHistory);
 
     console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
     console.log("nome: " + window.localStorage.getItem('nome'));
@@ -134,7 +141,7 @@ export class LoginPage {
     console.log("userName: " + window.localStorage.getItem('userName'));
     console.log("senha: " + window.localStorage.getItem('senha'));
     console.log("perfil: " + window.localStorage.getItem('perfil'));
-
+    console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
   }
 
   tapEvent() {
@@ -153,9 +160,9 @@ export class LoginPage {
     document.getElementById('idLogin-form').style.visibility = 'hidden';
   }
 
-  encontrarQuadras() {
+  pesquisarTodasAsQuadras() {
 
-    this.herokuProvider.encontrarQuadras().subscribe(
+    this.herokuProvider.pesquisarTodasAsQuadras().subscribe(
       data => {
         this.quadras = data;
         console.log(data);

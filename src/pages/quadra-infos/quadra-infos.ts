@@ -40,16 +40,16 @@ export class QuadraInfosPage {
     public alertCtrl: AlertController,
     private herokuProvider: HerokuProvider,
     private sanitizer: DomSanitizer) {
-
+      
   }
 
   ionViewDidLoad() {
-    this.encontrarQuadra();
+    this.pesquisarQuadraPorId();
     dataSelecionada = null;
     console.log('ionViewDidLoad RachasMapaPage');
   }
 
-  encontrarQuadra() {
+  pesquisarQuadraPorId() {
     let svg = `
       <div class="divContainerLoading">
         <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
@@ -77,13 +77,14 @@ export class QuadraInfosPage {
     });
     loading.present();
 
-    this.herokuProvider.encontrarQuadra(this.idParam).subscribe(
+    this.herokuProvider.pesquisarQuadraPorId(this.idParam).subscribe(
       data => {
         this.quadraInfos = data;
         console.log(data);
         this.dividirDiasFuncionamento();
       },
       err => {
+        loading.dismiss();
         console.log(err);
       },
       () => {
@@ -95,7 +96,7 @@ export class QuadraInfosPage {
   }
 
   dividirDiasFuncionamento() {
-    this.diasFuncionamentoArray = this.quadraInfos.diasFuncionamento.split(', ');
+    this.diasFuncionamentoArray = this.quadraInfos.daysOfOperations.split(', ');
 
     for (let dia of this.diasFuncionamentoArray) {
 
@@ -235,7 +236,7 @@ export class QuadraInfosPage {
   showConfirm(horario) {
     let confirm = this.alertCtrl.create({
       title: 'Você deseja marcar esse Racha?',
-      subTitle: horario.horarioInicio + ' - ' + horario.horarioFim,
+      subTitle: horario.startTime + ' - ' + horario.endTime,
       buttons: [
         {
           text: 'NÃO',
@@ -258,10 +259,10 @@ export class QuadraInfosPage {
 
   submit(horario) {
 
-    this.dataPost.idUsuario = window.localStorage.getItem('idUsuario');
-    this.dataPost.idQuadra = this.idParam;
-    this.dataPost.idHorario = horario.id;
-    this.dataPost.dataRacha = dataSelecionada;
+    this.dataPost.userId = window.localStorage.getItem('idUsuario');
+    this.dataPost.blockId = this.idParam;
+    this.dataPost.timeId = horario.id;
+    this.dataPost.streakDate = dataSelecionada;
 
     let svg = `
       <div class="divContainerLoading">
@@ -291,16 +292,18 @@ export class QuadraInfosPage {
     loading.present();
 
     console.log(this.dataPost);
-    this.herokuProvider.postRacha(this.dataPost).subscribe(data => {
-      console.log('resposta', data);
-    }, error => {
-      if (error['status'] == 201) {
+    
+    this.herokuProvider.postRacha(this.dataPost).subscribe(
+      (res) => {
+        console.log('resposta', res);
+      }, error => {
+        console.log("Oooops!", error);
+      },
+      () => {
         loading.dismiss();
         this.showAlert();
       }
-      else
-        console.log("Oooops!", error);
-    });
+    );
   }
 
   showAlert() {

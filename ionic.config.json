@@ -5,12 +5,10 @@
   "integrations": {
     "cordova": {}
   },
-  "name": "proxy-example",
-  "app_id": "",
   "proxies": [
     {
-      "path": "/vainorachaapi",
-      "proxyUrl": "https://vainoracha.herokuapp.com"
+      "path": "/vainorachapp",
+      "proxyUrl": "https://vainorachapp.herokuapp.com"
     }
   ]
 }

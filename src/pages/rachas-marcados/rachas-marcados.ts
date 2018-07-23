@@ -38,11 +38,11 @@ export class RachasMarcadosPage {
   }
 
   ionViewDidLoad() {
-    this.encontrarRachasMarcados();
+    this.pesquisarRachasMarcadosPorIdDoUsuario();
     console.log('ionViewDidLoad RachasMarcadosPage');
   }
 
-  encontrarRachasMarcados() {
+  pesquisarRachasMarcadosPorIdDoUsuario() {
     let svg = `
       <div class="divContainerLoading">
         <svg class="svgLoading" xmlns="http://www.w3.org/2000/svg" viewBox="140 0 910 1190">
@@ -70,7 +70,7 @@ export class RachasMarcadosPage {
     });
     loading.present();
 
-    this.herokuProvider.encontrarRachasMarcados().subscribe(
+    this.herokuProvider.pesquisarRachasMarcadosPorIdDoUsuario().subscribe(
       data => {
         this.rachasMarcados = data;
         console.log(data);
@@ -119,7 +119,7 @@ export class RachasMarcadosPage {
     slidingItem.close();
   }
 
-  showConfirm(slidingItem: ItemSliding, racha) {
+  showConfirm(racha) {
     let confirm = this.alertCtrl.create({
       title: 'Deseja cancelar esse Racha?',
       subTitle: 'Essa ação não poderá ser desfeita.',
@@ -163,7 +163,7 @@ export class RachasMarcadosPage {
             });
             loading.present();
 
-            this.deletarRacha(slidingItem, racha, loading);
+            this.deleteRacha(racha, loading);
           }
         }
       ]
@@ -171,16 +171,20 @@ export class RachasMarcadosPage {
     confirm.present();
   }
 
-  deletarRacha(slidingItem: ItemSliding, racha, loading) {
-    this.herokuProvider.deletarRacha(racha.id).subscribe(data => {
-      loading.dismiss();
-      this.showAlert(slidingItem);
+  deleteRacha(racha, loading) {
+    this.herokuProvider.deleteRacha(racha.id).subscribe(data => {
+      console.log('resposta', data);
     }, error => {
+      if (error['status'] == 200) {
+        loading.dismiss();
+        this.showAlert();
+      }
+      else
       console.log("Oooops! Erro ao deletar racha", error);
     });
   }
 
-  showAlert(slidingItem: ItemSliding) {
+  showAlert() {
     let alert = this.alertCtrl.create({
       title: 'Tudo certo!',
       subTitle: 'Racha deletado com sucesso.',
@@ -188,7 +192,7 @@ export class RachasMarcadosPage {
       buttons: [{
         text: 'Ok',
         handler: () => {
-          this.encontrarRachasMarcados();
+          this.pesquisarRachasMarcadosPorIdDoUsuario();
         }
       }]
     });
