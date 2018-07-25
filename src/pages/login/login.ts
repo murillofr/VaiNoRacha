@@ -94,6 +94,8 @@ export class LoginPage {
         }, error => {
           loading.dismiss();
           console.log("Oooops!", error);
+          console.log('user: ' + this.userData.user);
+          console.log('password: ' + this.userData.password);
           this.showAlert("Usuário ou senha incorretos.");
         },
         () => {
