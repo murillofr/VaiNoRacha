@@ -98,6 +98,10 @@ export class QuadraInfosPage {
   dividirDiasFuncionamento() {
     this.diasFuncionamentoArray = this.quadraInfos.daysOfOperations.split(', ');
 
+    console.log('');
+    console.log('DIAS DO ARRAY daysOfOperations: ', this.diasFuncionamentoArray);
+    console.log('');
+
     for (let dia of this.diasFuncionamentoArray) {
 
       if (dia == "Segunda") {
@@ -150,6 +154,10 @@ export class QuadraInfosPage {
     var teste = new Date(contat);
     var dia = teste.getDay();
     diaSemanaSelecionado = semana[dia];
+
+    console.log('');
+    console.log('DIA SELECIONADO: ', diaSemanaSelecionado);
+    console.log('');
 
     // Bloqueia botão caso o dia seja inválido
     if (this.diasFuncionamentoArray.indexOf(diaSemanaSelecionado) !== -1) {
