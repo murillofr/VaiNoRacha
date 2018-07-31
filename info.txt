@@ -82,7 +82,6 @@ Config.xml file:
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-googlemaps" spec="^2.1.1">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyC2Dmo4bMb95s_7Y3ttLQrtBgu_sFNEjbE" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyC2Dmo4bMb95s_7Y3ttLQrtBgu_sFNEjbE" />
@@ -92,10 +91,37 @@ Config.xml file:
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
+    <allow-navigation href="http://192.168.137.1:8100" />
+    <engine name="android" spec="6.3.0" />
 </widget>
 
 
-No Plugins Currently Installed
+Plugins: 
 
-No Platforms Currently Installed
+cordova-plugin-device,cordova-plugin-googlemaps,cordova-plugin-ionic-webview,cordova-plugin-splashscreen,cordova-plugin-whitelist,ionic-plugin-keyboard
+
+Android platform:
+
+**************************************************************************
+The "android" command is deprecated.
+For manual SDK, AVD, and project management, please use Android Studio.
+For command-line tools, use tools\bin\sdkmanager.bat
+and tools\bin\avdmanager.bat
+**************************************************************************
+
+Invoking "C:\Android\android-sdk\tools\bin\avdmanager" list target
+
+Loading local repository...                                                     [=========                              ] 25% Loading local repository...       [=========                              ] 25% Fetch remote repository...        [=========                              ] 25% Fetch remote repository...        [=========                              ] 25% Fetch remote repository...        [=======================================] 100% Fetch remote repository...       Available Android targets:
+----------
+id: 1 or "android-26"
+     Name: Android API 26
+     Type: Platform
+     API level: 26
+     Revision: 2
+----------
+id: 2 or "android-28"
+     Name: Android API 28
+     Type: Platform
+     API level: 28
+     Revision: 4
 

@@ -149,17 +149,23 @@ export class QuadraInfosPage {
 
     // Cria vetor para descobrir qual dia da semana foi selecionado
     var semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"];
-    var arr = dataSelecionada.split("/");
-    var concat = arr[1] + ' ' + arr[0] + ', ' + arr[2] + ' 00:00:00';
-    var newDate = new Date(concat);
+
+    // Concatena a data com a hora, criando o padrão necessário para a função
+    var concat = data + ' 00:00:00';
+
+    // Chama a função para criar um novo Date livre de erros de Fuso Horário
+    var newDate = this.convertDateForIos(concat);
+
+    // Pega o dia referente a data criada na função
     var dia = newDate.getDay();
+
+    // Pega o nome do dia dentro do array
     diaSemanaSelecionado = semana[dia];
 
     this.presentAlert(
       'data que vem do botão: ' + data + '<br><br>' + 
       'data transf. p/ Brasil: ' + dataSelecionada + '<br><br>' + 
       'semana: ' + semana + '<br><br>' + 
-      'arr: ' + arr + '<br><br>' + 
       'concat: ' + concat + '<br><br>' + 
       'newDate: ' + newDate + '<br><br>' + 
       'dia: ' + dia + '<br><br>' + 
@@ -343,6 +349,12 @@ export class QuadraInfosPage {
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  convertDateForIos(date) {
+    var arr = date.split(/[- :]/);
+    date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+    return date;
   }
 
 }
