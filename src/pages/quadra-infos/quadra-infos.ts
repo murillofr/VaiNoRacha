@@ -150,14 +150,21 @@ export class QuadraInfosPage {
     // Cria vetor para descobrir qual dia da semana foi selecionado
     var semana = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"];
     var arr = dataSelecionada.split("/");
-    var contat = arr[1] + ' ' + arr[0] + ', ' + arr[2] + ' 00:00:00';
-    var teste = new Date(contat);
-    var dia = teste.getDay();
+    var concat = arr[1] + ' ' + arr[0] + ', ' + arr[2] + ' 00:00:00';
+    var newDate = new Date(concat);
+    var dia = newDate.getDay();
     diaSemanaSelecionado = semana[dia];
 
-    console.log('');
-    console.log('DIA SELECIONADO: ', diaSemanaSelecionado);
-    console.log('');
+    this.presentAlert(
+      'data que vem do botão: ' + data + '<br><br>' + 
+      'data transf. p/ Brasil: ' + dataSelecionada + '<br><br>' + 
+      'semana: ' + semana + '<br><br>' + 
+      'arr: ' + arr + '<br><br>' + 
+      'concat: ' + concat + '<br><br>' + 
+      'newDate: ' + newDate + '<br><br>' + 
+      'dia: ' + dia + '<br><br>' + 
+      'diaSemanaSelecionado: ' + diaSemanaSelecionado
+    );
 
     // Bloqueia botão caso o dia seja inválido
     if (this.diasFuncionamentoArray.indexOf(diaSemanaSelecionado) !== -1) {
@@ -326,6 +333,14 @@ export class QuadraInfosPage {
           this.horariosPesquisados = [];
         }
       }]
+    });
+    alert.present();
+  }
+
+  presentAlert(infos) {
+    let alert = this.alertCtrl.create({
+      message: infos,
+      buttons: ['OK']
     });
     alert.present();
   }
