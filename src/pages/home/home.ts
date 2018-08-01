@@ -125,7 +125,7 @@ export class HomePage {
 
   addMarker() {
 
-    var image = './../../assets/icon/MarkerLocalUserSmall.png';
+    var image = 'assets/icon/MarkerLocalUserSmall.png';
     var marker = new google.maps.Marker({
       map: this.map,
       position: this.map.getCenter(),
@@ -258,7 +258,7 @@ export class HomePage {
 
   createMarker(id, latlng, nome, logadouro, numero, bairro, telefone, diasFuncionamento) {
     var id = id;
-    var image = './../../assets/icon/MarkerRachaSmall.png';
+    var image = 'assets/icon/MarkerRachaSmall.png';
     var marker = new google.maps.Marker({
       map: this.map,
       position: latlng,
