@@ -162,16 +162,6 @@ export class QuadraInfosPage {
     // Pega o nome do dia dentro do array
     diaSemanaSelecionado = semana[dia];
 
-    this.presentAlert(
-      'data que vem do botão: ' + data + '<br><br>' + 
-      'data transf. p/ Brasil: ' + dataSelecionada + '<br><br>' + 
-      'semana: ' + semana + '<br><br>' + 
-      'concat: ' + concat + '<br><br>' + 
-      'newDate: ' + newDate + '<br><br>' + 
-      'dia: ' + dia + '<br><br>' + 
-      'diaSemanaSelecionado: ' + diaSemanaSelecionado
-    );
-
     // Bloqueia botão caso o dia seja inválido
     if (this.diasFuncionamentoArray.indexOf(diaSemanaSelecionado) !== -1) {
       this.diaInvalido = false;
@@ -339,14 +329,6 @@ export class QuadraInfosPage {
           this.horariosPesquisados = [];
         }
       }]
-    });
-    alert.present();
-  }
-
-  presentAlert(infos) {
-    let alert = this.alertCtrl.create({
-      message: infos,
-      buttons: ['OK']
     });
     alert.present();
   }
