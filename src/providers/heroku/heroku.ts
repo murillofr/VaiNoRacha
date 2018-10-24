@@ -24,28 +24,28 @@ export class HerokuProvider {
 
   // Usado em: Quadra Infos
   pesquisarQuadraPorId(id) {
-    var url = `${this.basepath}/quadras/${id}`;
+    var url = `${this.basepath}/block/${id}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: Marcar Racha
   pesquisarQuadraPorNome(nome) {
-    var url = `${this.basepath}/quadras/quadra?name=${nome}`;
+    var url = `${this.basepath}/block/block?name=${nome}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: Marcar Racha
   pesquisarQuadrasDisponiveisPorIdeNome(id, data) {
-    var url = `${this.basepath}/quadras/disponiveis?timeId=${id}&date=${data}`;
+    var url = `${this.basepath}/block/available?scheduleId=${id}&date=${data}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: Home, Splash, Login
   pesquisarTodasAsQuadras() {
-    var url = `${this.basepath}/quadras`;
+    var url = `${this.basepath}/block?order=name%3Ddesc%2C+createdAt%3DASC`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
@@ -54,21 +54,28 @@ export class HerokuProvider {
 
   // Usado em: 
   pesquisarUsuarioPorId(id) {
-    var url = `${this.basepath}/usuarios/${id}`;
+    var url = `${this.basepath}/user/${id}`;
+    var response = this.http.get(url).map(res => res.json());
+    return response;
+  }
+
+  // Usado em: 
+  pesquisarUsuarioPorNome(nome) {
+    var url = `${this.basepath}/user/userName?name=${nome}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: Rachas Marcados
   pesquisarRachasMarcadosPorIdDoUsuario() {
-    var url = `${this.basepath}/usuarios/rachas/${window.localStorage.getItem('idUsuario')}`;
+    var url = `${this.basepath}/user/streaks/${window.localStorage.getItem('id')}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: 
   pesquisarTodosOsUsuarios() {
-    var url = `${this.basepath}/usuarios`;
+    var url = `${this.basepath}/user`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
@@ -77,28 +84,28 @@ export class HerokuProvider {
 
   // Usado em: 
   pesquisarHorarioPorId(id) {
-    var url = `${this.basepath}/horarios/${id}`;
+    var url = `${this.basepath}/times/${id}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: Quadra Infos
   pesquisarHorariosDisponiveis(id, data) {
-    var url = `${this.basepath}/horarios/desbloqueados?blockId=${id}&date=${data}`;
+    var url = `${this.basepath}/times/unblocked?blockId=${id}&date=${data}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: 
   pesquisarHorariosNaoDisponiveis(id, data) {
-    var url = `${this.basepath}/horarios/bloqueados?blockId=${id}&date=${data}`;
+    var url = `${this.basepath}/times/blocked?blockId=${id}&date=${data}`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
 
   // Usado em: Marcar Racha
   pesquisarTodosOsHorarios() {
-    var url = `${this.basepath}/horarios`;
+    var url = `${this.basepath}/times`;
     var response = this.http.get(url).map(res => res.json());
     return response;
   }
@@ -118,11 +125,11 @@ export class HerokuProvider {
       timeId: data.timeId,
       streakDate: data.streakDate,
       blockRentStatus: 2,
-      paymentId: 2,
+      paymentId: 1,
     });
     console.log('data', data);
     console.log('myData', myData);
-    return this.httpClient.post(this.basepath + '/rachas', myData, {
+    return this.httpClient.post(this.basepath + '/streak', myData, {
       headers: headers,
       observe: 'response', responseType: 'json'
     });
@@ -146,7 +153,24 @@ export class HerokuProvider {
   // Usado em: Configurações
   putUsuario(id, data) {
     var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
-    return this.httpClient.put(`${this.basepath}/usuarios/${id}`, data, {
+    return this.httpClient.put(`${this.basepath}/user/${id}`, data, {
+      headers: headers,
+      observe: 'response', responseType: 'json'
+    });
+  }
+
+  putUsuario2(id, newPassword) {
+    var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
+    var myData = JSON.stringify({
+      name: window.localStorage.getItem('name'),
+      password: newPassword,
+      birthDate: window.localStorage.getItem('birthDate'),
+      userName: window.localStorage.getItem('userName'),
+      cpfOrCnpj: window.localStorage.getItem('cpfOrCnpj'),
+      loggedByFace: false,
+    });
+    console.log('myData', myData);
+    return this.httpClient.put(`${this.basepath}/user/${id}`, myData, {
       headers: headers,
       observe: 'response', responseType: 'json'
     });
@@ -160,7 +184,7 @@ export class HerokuProvider {
   //--------------- DELETE ---------------
   // Usado em: Rachas Marcados
   deleteRacha(id) {
-    var url = `${this.basepath}/rachas/${id}`;
+    var url = `${this.basepath}/streak/${id}`;
     var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
     return this.httpClient.delete(url, { headers: headers });
   }

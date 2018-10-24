@@ -72,8 +72,10 @@ export class RachasMarcadosPage {
 
     this.herokuProvider.pesquisarRachasMarcadosPorIdDoUsuario().subscribe(
       data => {
-        this.rachasMarcados = data;
+        console.log("Rachas Marcados:");
         console.log(data);
+        //O problema está aqui embaixo. Acho que é pq está vindo com o "Content" tb.
+        this.rachasMarcados = data;
       },
       err => {
         console.log(err);

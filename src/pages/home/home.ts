@@ -25,7 +25,7 @@ declare var google;
 export class HomePage {
 
   private quadrasParam = this.navParams.data.quadras;
-  private quadras: Array<any>;
+  private quadras;
   private latitudeUser;
   private longitudeUser;
 
@@ -48,7 +48,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     if (this.quadrasParam !== undefined) {
-      document.getElementById("h3MenuNomeUsuario").innerHTML = window.localStorage.getItem('nome');
+      document.getElementById("h3MenuNomeUsuario").innerHTML = window.localStorage.getItem('name');
       this.quadras = this.quadrasParam;
       this.loadMap();
     } else {
@@ -225,20 +225,27 @@ export class HomePage {
     // de acordo com as posições dos marcadores
     var bounds = new google.maps.LatLngBounds();
     console.log(this.quadras);
+
     // Loop que vai percorrer a informação contida no array quadras
     // para que a função createMarker possa criar os marcadores
-    for (let i in this.quadras) {
-      var coordenadasSplit = this.quadras[i].coordinate.split('/');
-      var id = this.quadras[i].id;
-      var latlng = new google.maps.LatLng(coordenadasSplit[0], coordenadasSplit[1]);
-      var nome = this.quadras[i].name;
-      var logadouro = this.quadras[i].street;
-      var numero = this.quadras[i].number;
-      var bairro = this.quadras[i].neighborhood;
-      var telefone = this.quadras[i].telephone;
-      var diasFuncionamento = this.quadras[i].daysOfOperations;
+    for (var i = 0; i < this.quadras.length; i++) {
+      var id = this.quadras.content[i].id;
+      var name = this.quadras.content[i].name;
+      var telephone = this.quadras.content[i].telephone;
+      var daysOfOperations = this.quadras.content[i].daysOfOperations;
+      var latlng = new google.maps.LatLng(
+        this.quadras.content[i].address.coordinate.latitude,
+        this.quadras.content[i].address.coordinate.longitude
+      );
+      var street = this.quadras.content[i].address.street;
+      var number = this.quadras.content[i].address.number;
+      var neighborhood = this.quadras.content[i].address.neighborhood;
+      var state = this.quadras.content[i].address.state;
+      var city = this.quadras.content[i].address.city;
+      var zipCode = this.quadras.content[i].address.zipCode;
+      var complement = this.quadras.content[i].address.complement;
 
-      this.createMarker(id, latlng, nome, logadouro, numero, bairro, telefone, diasFuncionamento);
+      this.createMarker(id, latlng, name, street, number, neighborhood, telephone, daysOfOperations);
 
       // Os valores de latitude e longitude do marcador são adicionados à
       // variável bounds

@@ -24,7 +24,12 @@ export class LoginPage {
   private quadras: Array<any>;
 
   responseData: any;
-  userData = { "user": "", "password": "" };
+  userData = { 
+    "email" : "vito.gomes@gmail.com", 
+    "password": "", 
+    "userName": "", 
+    "loggedByFace" : false 
+  };
 
   safeSvg: any;
 
@@ -41,19 +46,22 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
-    console.log("nome: " + window.localStorage.getItem('nome'));
-    console.log("cpf_cnpj: " + window.localStorage.getItem('cpf_cnpj'));
+    console.log("id: " + window.localStorage.getItem('id'));
+    console.log("name: " + window.localStorage.getItem('name'));
+    console.log("email: " + window.localStorage.getItem('email'));
     console.log("userName: " + window.localStorage.getItem('userName'));
-    console.log("senha: " + window.localStorage.getItem('senha'));
-    console.log("perfil: " + window.localStorage.getItem('perfil'));
+    console.log("birthDate: " + window.localStorage.getItem('birthDate'));
+    console.log("photo: " + window.localStorage.getItem('photo'));
+    console.log("cpfOrCnpj: " + window.localStorage.getItem('cpfOrCnpj'));
+    console.log("loggedByFace: " + window.localStorage.getItem('loggedByFace'));
+    console.log("profiles: " + window.localStorage.getItem('profiles'));
     console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
-    console.log('ionViewDidLoad LoginPage');
+    console.log("password: " + window.localStorage.getItem('password'));
   }
 
   login() {
 
-    if (this.userData.user == "") {
+    if (this.userData.userName == "") {
       this.showAlert("Usuario obrigatorio.");
     } else if (this.userData.password == "") {
       this.showAlert("Senha obrigatoria.");
@@ -94,7 +102,7 @@ export class LoginPage {
         }, error => {
           loading.dismiss();
           console.log("Oooops!", error);
-          console.log('user: ' + this.userData.user);
+          console.log('user: ' + this.userData.userName);
           console.log('password: ' + this.userData.password);
           this.showAlert("Usuário ou senha incorretos.");
         },
@@ -129,21 +137,29 @@ export class LoginPage {
   salvarDadosLoginStorage() {
     console.log('this.data', this.data);
 
-    window.localStorage.setItem('idUsuario', this.data.id);
-    window.localStorage.setItem('nome', this.data.name);
-    window.localStorage.setItem('cpf_cnpj', this.data.cpfOrCnpj);
-    window.localStorage.setItem('userName', this.data.userName);
-    window.localStorage.setItem('senha', this.userData.password);
-    window.localStorage.setItem('perfil', this.data.perfis);
-    window.localStorage.setItem('rentalHistory', this.data.rentalHistory);
+    window.localStorage.setItem('id', this.data.content.id);
+    window.localStorage.setItem('name', this.data.content.name);
+    window.localStorage.setItem('email', this.data.content.email);
+    window.localStorage.setItem('userName', this.data.content.userName);
+    window.localStorage.setItem('birthDate', this.data.content.birthDate);
+    window.localStorage.setItem('photo', this.data.content.photo);
+    window.localStorage.setItem('cpfOrCnpj', this.data.content.cpfOrCnpj);
+    window.localStorage.setItem('loggedByFace', this.data.content.loggedByFace);
+    window.localStorage.setItem('profiles', this.data.content.profiles);
+    window.localStorage.setItem('rentalHistory', this.data.content.rentalHistory);
+    window.localStorage.setItem('password', this.userData.password);    
 
-    console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
-    console.log("nome: " + window.localStorage.getItem('nome'));
-    console.log("cpf_cnpj: " + window.localStorage.getItem('cpf_cnpj'));
+    console.log("id: " + window.localStorage.getItem('id'));
+    console.log("name: " + window.localStorage.getItem('name'));
+    console.log("email: " + window.localStorage.getItem('email'));
     console.log("userName: " + window.localStorage.getItem('userName'));
-    console.log("senha: " + window.localStorage.getItem('senha'));
-    console.log("perfil: " + window.localStorage.getItem('perfil'));
+    console.log("birthDate: " + window.localStorage.getItem('birthDate'));
+    console.log("photo: " + window.localStorage.getItem('photo'));
+    console.log("cpfOrCnpj: " + window.localStorage.getItem('cpfOrCnpj'));
+    console.log("loggedByFace: " + window.localStorage.getItem('loggedByFace'));
+    console.log("profiles: " + window.localStorage.getItem('profiles'));
     console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
+    console.log("password: " + window.localStorage.getItem('password'));
   }
 
   tapEvent() {
@@ -156,7 +172,7 @@ export class LoginPage {
   }
 
   aparecerDadosUsuario() {
-    document.getElementById("spanNomeUsuario").innerHTML = window.localStorage.getItem('nome');
+    document.getElementById("spanNomeUsuario").innerHTML = window.localStorage.getItem('name');
     document.getElementById("divDadosUsuarioLogado").setAttribute("class", "aparecerDadosUsuarioLogado");
     document.getElementById('idLogin-form').style.animation = 'login-animation-out 0.5s ease-in-out';
     document.getElementById('idLogin-form').style.visibility = 'hidden';

@@ -31,15 +31,9 @@ export class SplashPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SplashPage');
 
-    var body = document.getElementById("bodySplash");
+    //window.localStorage.clear();
 
-    // window.localStorage.removeItem('idUsuario');
-    // window.localStorage.removeItem('nome');
-    // window.localStorage.removeItem('cpf_cnpj');
-    // window.localStorage.removeItem('userName');
-    // window.localStorage.removeItem('senha');
-    // window.localStorage.removeItem('perfil');
-    // window.localStorage.removeItem('rentalHistory');
+    var body = document.getElementById("bodySplash");
 
     clearInterval(teste);
     var teste = setInterval(() => {
@@ -49,7 +43,7 @@ export class SplashPage {
         this.setarPageInicial();
 
         if (this.pageAtiva == 'MAPA') {
-          document.getElementById("spanNomeUsuario-Splash").innerHTML = window.localStorage.getItem('nome');
+          document.getElementById("spanNomeUsuario-Splash").innerHTML = window.localStorage.getItem('name');
           document.getElementById('divDadosUsuarioLogado-Splash').style.animation = 'splash-animation-in 0.5s forwards ease-in-out';
           this.pesquisarTodasAsQuadras();
         } else if (this.pageAtiva == 'LOGIN') {
@@ -71,16 +65,20 @@ export class SplashPage {
 
   setarPageInicial() {
 
-    console.log("idUsuario: " + window.localStorage.getItem('idUsuario'));
-    console.log("nome: " + window.localStorage.getItem('nome'));
-    console.log("cpf_cnpj: " + window.localStorage.getItem('cpf_cnpj'));
-    console.log("userName: " + window.localStorage.getItem('userName'));
-    console.log("senha: " + window.localStorage.getItem('senha'));
-    console.log("perfil: " + window.localStorage.getItem('perfil'));
-    console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
+    // console.log("id: " + window.localStorage.getItem('id'));
+    // console.log("name: " + window.localStorage.getItem('name'));
+    // console.log("email: " + window.localStorage.getItem('email'));
+    // console.log("userName: " + window.localStorage.getItem('userName'));
+    // console.log("birthDate: " + window.localStorage.getItem('birthDate'));
+    // console.log("photo: " + window.localStorage.getItem('photo'));
+    // console.log("cpfOrCnpj: " + window.localStorage.getItem('cpfOrCnpj'));
+    // console.log("loggedByFace: " + window.localStorage.getItem('loggedByFace'));
+    // console.log("profiles: " + window.localStorage.getItem('profiles'));
+    // console.log("rentalHistory: " + window.localStorage.getItem('rentalHistory'));
+    // console.log("password: " + window.localStorage.getItem('password'));
 
     if (window.localStorage.getItem('userName') !== null &&
-      window.localStorage.getItem('senha') !== null) {
+      window.localStorage.getItem('password') !== null) {
       this.pageAtiva = 'MAPA';
     } else {
       this.pageAtiva = 'LOGIN';
