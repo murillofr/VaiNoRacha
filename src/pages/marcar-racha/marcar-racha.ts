@@ -28,9 +28,10 @@ export class MarcarRachaPage {
 
   safeSvg: any;
 
-  private todosHorarios: Array<any>;
-  private quadrasPesquisadas: Array<any>;
-  private horariosPesquisados: Array<any>;
+  private todosHorarios;
+  private quadrasPesquisadas;
+  private horariosPesquisados;
+  //: Array<any>
   private marcouRacha = false;
 
   constructor(
@@ -95,7 +96,7 @@ export class MarcarRachaPage {
 
     this.herokuProvider.pesquisarTodosOsHorarios().subscribe(
       data => {
-        this.todosHorarios = data;
+        this.todosHorarios = data.content;
         console.log(data);
       },
       err => {
@@ -139,7 +140,7 @@ export class MarcarRachaPage {
 
     this.herokuProvider.pesquisarQuadraPorNome(termoBuscado).subscribe(
       data => {
-        this.quadrasPesquisadas = data;
+        this.quadrasPesquisadas = data.content;
         console.log(data);
       },
       err => {
@@ -202,7 +203,7 @@ export class MarcarRachaPage {
 
     this.herokuProvider.pesquisarQuadrasDisponiveisPorIdeNome(id, data).subscribe(
       data => {
-        this.horariosPesquisados = data;
+        this.horariosPesquisados = data.content;
         console.log(data);
       },
       err => {

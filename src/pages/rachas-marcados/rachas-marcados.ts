@@ -22,7 +22,7 @@ export class RachasMarcadosPage {
 
   pageMarcarRacha = { title: 'Marcar Racha', component: MarcarRachaPage };
 
-  private rachasMarcados: Array<any>;
+  private rachasMarcados;
 
   safeSvg: any;
 
@@ -74,8 +74,7 @@ export class RachasMarcadosPage {
       data => {
         console.log("Rachas Marcados:");
         console.log(data);
-        //O problema está aqui embaixo. Acho que é pq está vindo com o "Content" tb.
-        this.rachasMarcados = data;
+        this.rachasMarcados = data.content;
       },
       err => {
         console.log(err);

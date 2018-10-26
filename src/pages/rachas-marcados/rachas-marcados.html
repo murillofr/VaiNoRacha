@@ -27,8 +27,8 @@
 
     <ion-item (tap)="tapEvent()" class="clickEndereco">
       <ion-icon class="fa-map-signs" item-start></ion-icon>
-      <h3>{{ rachaMarcado.blockStreet }}, {{ rachaMarcado.blockNumber }}</h3>
-      <p>{{ rachaMarcado.blockNeighborhood }}</p>
+      <h3>{{ rachaMarcado.blockAddress.street }}, {{ rachaMarcado.blockAddress.number }}</h3>
+      <p>{{ rachaMarcado.blockAddress.neighborhood }}</p>
     </ion-item>
 
     <ion-item>

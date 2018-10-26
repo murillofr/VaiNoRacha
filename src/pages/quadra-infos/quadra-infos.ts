@@ -27,10 +27,9 @@ export class QuadraInfosPage {
 
   private quadraInfos: any = {};
   private idParam = this.navParams.data.id;
-  private diasFuncionamentoArray = [];
   private terminouCarregar = false;
   private diaInvalido = false;
-  private horariosPesquisados: Array<any>;
+  private horariosPesquisados;
 
   constructor(
     public navCtrl: NavController,
@@ -79,7 +78,7 @@ export class QuadraInfosPage {
 
     this.herokuProvider.pesquisarQuadraPorId(this.idParam).subscribe(
       data => {
-        this.quadraInfos = data;
+        this.quadraInfos = data.content;
         console.log(data);
         this.dividirDiasFuncionamento();
       },
@@ -96,13 +95,8 @@ export class QuadraInfosPage {
   }
 
   dividirDiasFuncionamento() {
-    this.diasFuncionamentoArray = this.quadraInfos.daysOfOperations.split(', ');
 
-    console.log('');
-    console.log('DIAS DO ARRAY daysOfOperations: ', this.diasFuncionamentoArray);
-    console.log('');
-
-    for (let dia of this.diasFuncionamentoArray) {
+    for (let dia of this.quadraInfos.daysOfOperations) {
 
       if (dia == "Segunda") {
         document.getElementById("colSeg").setAttribute("class", "quadraAberta");
@@ -163,7 +157,7 @@ export class QuadraInfosPage {
     diaSemanaSelecionado = semana[dia];
 
     // Bloqueia botão caso o dia seja inválido
-    if (this.diasFuncionamentoArray.indexOf(diaSemanaSelecionado) !== -1) {
+    if (this.quadraInfos.daysOfOperations.indexOf(diaSemanaSelecionado) !== -1) {
       this.diaInvalido = false;
     } else {
       this.diaInvalido = true;
@@ -230,7 +224,7 @@ export class QuadraInfosPage {
 
     this.herokuProvider.pesquisarHorariosDisponiveis(id, data).subscribe(
       data => {
-        this.horariosPesquisados = data;
+        this.horariosPesquisados = data.content;
         console.log(data);
       },
       err => {
@@ -270,7 +264,7 @@ export class QuadraInfosPage {
 
   submit(horario) {
 
-    this.dataPost.userId = window.localStorage.getItem('idUsuario');
+    this.dataPost.userId = window.localStorage.getItem('id');
     this.dataPost.blockId = this.idParam;
     this.dataPost.timeId = horario.id;
     this.dataPost.streakDate = dataSelecionada;

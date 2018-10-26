@@ -79,7 +79,7 @@ export class RachasPage {
 
   submit() {
 
-    this.dataPost.userId = window.localStorage.getItem('idUsuario');
+    this.dataPost.userId = window.localStorage.getItem('id');
     this.dataPost.blockId = this.quadra.id;
     this.dataPost.timeId = this.horarioRacha.id;
     this.dataPost.streakDate = this.dataRacha;

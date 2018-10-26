@@ -18,8 +18,8 @@
 
     <ion-item (tap)="tapEvent()" class="clickEndereco">
       <ion-icon class="fa-map-signs" item-start></ion-icon>
-      <h3>{{ terminouCarregar ? quadraInfos.street + ', ' : 'Localizando...'}}{{ terminouCarregar ? quadraInfos.number : ''}}</h3>
-      <h3>{{ terminouCarregar ? quadraInfos.neighborhood : 'Localizando...'}}</h3>
+      <h3>{{ terminouCarregar ? quadraInfos.address.street + ', ' : 'Localizando...'}}{{ terminouCarregar ? quadraInfos.address.number : ''}}</h3>
+      <h3>{{ terminouCarregar ? quadraInfos.address.neighborhood : 'Localizando...'}}</h3>
     </ion-item>
 
     <ion-item>

@@ -25,7 +25,7 @@ export class LoginPage {
 
   responseData: any;
   userData = { 
-    "email" : "vito.gomes@gmail.com", 
+    "email" : "", 
     "password": "", 
     "userName": "", 
     "loggedByFace" : false 

@@ -151,15 +151,7 @@ export class HerokuProvider {
 
   //--------------- PUT ---------------
   // Usado em: Configurações
-  putUsuario(id, data) {
-    var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
-    return this.httpClient.put(`${this.basepath}/user/${id}`, data, {
-      headers: headers,
-      observe: 'response', responseType: 'json'
-    });
-  }
-
-  putUsuario2(id, newPassword) {
+  putUsuario(id, newPassword) {
     var headers = new HttpHeaders('Content-Type:application/json; charset=UTF-8');
     var myData = JSON.stringify({
       name: window.localStorage.getItem('name'),

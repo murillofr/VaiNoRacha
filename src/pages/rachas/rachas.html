@@ -17,8 +17,8 @@
 
     <ion-item (tap)="tapEvent()" class="clickEndereco">
       <ion-icon class="fa-map-signs" item-start></ion-icon>
-      <h3>{{ quadra.street }}, {{ quadra.number }}</h3>
-      <p>{{ quadra.neighborhood }}</p>
+      <h3>{{ quadra.address.street }}, {{ quadra.address.number }}</h3>
+      <p>{{ quadra.address.neighborhood }}</p>
     </ion-item>
 
     <ion-item>

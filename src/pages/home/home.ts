@@ -77,7 +77,6 @@ export class HomePage {
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      this.addMarker(); 
 
       // Estilizando o mapa;
       // Criando um array com os estilos
@@ -112,7 +111,10 @@ export class HomePage {
       // Aplicando as configurações do mapa
       this.map.mapTypes.set('map_style', styledMap);
       this.map.setMapTypeId('map_style');
-      
+
+      // Chamada para a função que irá incluir o marcador do Usuario
+      this.addMarker(); 
+
       // Chamada para a função que vai percorrer a informação
       // contida no array quadras e criar os marcadores a mostrar no mapa
       this.displayMarkers();
@@ -228,7 +230,7 @@ export class HomePage {
 
     // Loop que vai percorrer a informação contida no array quadras
     // para que a função createMarker possa criar os marcadores
-    for (var i = 0; i < this.quadras.length; i++) {
+    for (var i = 0; i < this.quadras.content.length; i++) {
       var id = this.quadras.content[i].id;
       var name = this.quadras.content[i].name;
       var telephone = this.quadras.content[i].telephone;
@@ -240,10 +242,10 @@ export class HomePage {
       var street = this.quadras.content[i].address.street;
       var number = this.quadras.content[i].address.number;
       var neighborhood = this.quadras.content[i].address.neighborhood;
-      var state = this.quadras.content[i].address.state;
-      var city = this.quadras.content[i].address.city;
-      var zipCode = this.quadras.content[i].address.zipCode;
-      var complement = this.quadras.content[i].address.complement;
+      // var state = this.quadras.content[i].address.state;
+      // var city = this.quadras.content[i].address.city;
+      // var zipCode = this.quadras.content[i].address.zipCode;
+      // var complement = this.quadras.content[i].address.complement;
 
       this.createMarker(id, latlng, name, street, number, neighborhood, telephone, daysOfOperations);
 
@@ -292,7 +294,11 @@ export class HomePage {
       // Cria a nova Info Window com referência à variável infoWindow.
       this.infoWindow = new google.maps.InfoWindow();
 
-      var diasFuncionamentoEditado = diasFuncionamento.split(', ').join('<br />');
+      // Insere quebras de linha nos dias de funcionamento
+      var diasFuncionamentoEditado = "";
+      for (var i = 0; i < diasFuncionamento.length; i++) {
+        diasFuncionamentoEditado = diasFuncionamentoEditado + diasFuncionamento[i] + '<br />'
+      }
 
       // Variável que define a estrutura do HTML a inserir na Info Window.
       var iwContent = '<div id="iw_container">' +
